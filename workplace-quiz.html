@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What's Your Workplace Personality?</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --purple-light: #EEEDFE;
+    --purple-mid: #7F77DD;
+    --purple-dark: #3C3489;
+    --teal-light: #E1F5EE;
+    --teal-mid: #1D9E75;
+    --coral-light: #FAECE7;
+    --coral-mid: #D85A30;
+    --amber-light: #FAEEDA;
+    --amber-mid: #BA7517;
+    --gray-bg: #F7F7F5;
+    --text-primary: #1a1a1a;
+    --text-secondary: #6b6b6b;
+    --border: #e4e4e0;
+    --white: #ffffff;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--gray-bg);
+    color: var(--text-primary);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 1rem 4rem;
+  }
+
+  .header {
+    text-align: center;
+    max-width: 560px;
+    margin-bottom: 2.5rem;
+  }
+
+  .eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--purple-mid);
+    margin-bottom: 0.75rem;
+  }
+
+  h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(28px, 5vw, 42px);
+    font-weight: 400;
+    line-height: 1.2;
+    color: var(--text-primary);
+    margin-bottom: 0.75rem;
+  }
+
+  .subtitle {
+    font-size: 15px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+  }
+
+  .card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2rem;
+    width: 100%;
+    max-width: 580px;
+  }
+
+  .progress-wrap {
+    margin-bottom: 1.75rem;
+  }
+
+  .progress-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+  }
+
+  .progress-track {
+    height: 3px;
+    background: #ebebeb;
+    border-radius: 99px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: var(--purple-mid);
+    border-radius: 99px;
+    transition: width 0.5s cubic-bezier(0.4,0,0.2,1);
+  }
+
+  .question-text {
+    font-family: 'DM Serif Display', serif;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 1.45;
+    color: var(--text-primary);
+    margin-bottom: 1.5rem;
+  }
+
+  .options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .opt {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px 16px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+    background: var(--white);
+    text-align: left;
+    width: 100%;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .opt:hover { border-color: #c4c2f0; background: #fafafa; }
+
+  .opt.selected {
+    border-color: var(--purple-mid);
+    background: var(--purple-light);
+  }
+
+  .opt-dot {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 1.5px solid var(--border);
+    flex-shrink: 0;
+    margin-top: 1px;
+    transition: all 0.15s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .opt.selected .opt-dot {
+    border-color: var(--purple-mid);
+    background: var(--purple-mid);
+  }
+
+  .opt.selected .opt-dot::after {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: white;
+  }
+
+  .opt-label {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--text-primary);
+  }
+
+  .opt.selected .opt-label { color: var(--purple-dark); }
+
+  .next-wrap {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .next-btn {
+    padding: 11px 28px;
+    background: var(--purple-mid);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    display: none;
+    transition: background 0.15s, transform 0.1s;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .next-btn:hover { background: var(--purple-dark); }
+  .next-btn:active { transform: scale(0.98); }
+
+  /* Result card */
+  .result-wrap { display: none; text-align: center; }
+
+  .result-badge {
+    display: inline-block;
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    font-size: 32px;
+    line-height: 72px;
+    margin-bottom: 1.25rem;
+  }
+
+  .result-type {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+
+  .result-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 30px;
+    font-weight: 400;
+    margin-bottom: 1rem;
+  }
+
+  .result-desc {
+    font-size: 15px;
+    color: var(--text-secondary);
+    line-height: 1.75;
+    max-width: 420px;
+    margin: 0 auto 1.75rem;
+  }
+
+  .result-divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 1.5rem 0;
+  }
+
+  .result-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-outline {
+    padding: 10px 22px;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    color: var(--text-primary);
+    font-family: 'Inter', sans-serif;
+    transition: background 0.15s;
+  }
+  .btn-outline:hover { background: var(--gray-bg); }
+
+  .btn-primary {
+    padding: 10px 22px;
+    background: var(--purple-mid);
+    border: none;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    color: white;
+    font-family: 'Inter', sans-serif;
+    transition: background 0.15s;
+  }
+  .btn-primary:hover { background: var(--purple-dark); }
+
+  /* Submitting state */
+  .submit-status {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-top: 1rem;
+    min-height: 20px;
+    text-align: center;
+  }
+
+  .submit-status.success { color: var(--teal-mid); }
+  .submit-status.error { color: var(--coral-mid); }
+
+  /* Personality colors */
+  .type-visionary .result-badge { background: var(--purple-light); }
+  .type-visionary .result-type { color: var(--purple-mid); }
+  .type-visionary .result-title { color: var(--purple-dark); }
+
+  .type-executor .result-badge { background: var(--amber-light); }
+  .type-executor .result-type { color: var(--amber-mid); }
+  .type-executor .result-title { color: #633806; }
+
+  .type-harmonizer .result-badge { background: var(--teal-light); }
+  .type-harmonizer .result-type { color: var(--teal-mid); }
+  .type-harmonizer .result-title { color: #085041; }
+
+  .type-strategist .result-badge { background: var(--coral-light); }
+  .type-strategist .result-type { color: var(--coral-mid); }
+  .type-strategist .result-title { color: #711B13; }
+
+  @media (max-width: 480px) {
+    .card { padding: 1.5rem; }
+    .question-text { font-size: 18px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="eyebrow">Workplace Personality Quiz</div>
+  <h1>What kind of colleague are you?</h1>
+  <p class="subtitle">5 quick questions. Find out which workplace personality type fits you best.</p>
+</div>
+
+<div class="card" id="quiz-card">
+  <div class="progress-wrap">
+    <div class="progress-meta">
+      <span id="q-counter">Question 1 of 5</span>
+      <span id="q-pct">0%</span>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+  </div>
+
+  <div id="quiz-area">
+    <p class="question-text" id="q-text"></p>
+    <div class="options" id="options"></div>
+    <div class="next-wrap">
+      <button class="next-btn" id="next-btn" onclick="nextQ()">Next →</button>
+    </div>
+  </div>
+
+  <div class="result-wrap" id="result-wrap">
+    <div class="result-badge" id="r-emoji"></div>
+    <div class="result-type" id="r-type"></div>
+    <h2 class="result-title" id="r-title"></h2>
+    <p class="result-desc" id="r-desc"></p>
+    <hr class="result-divider">
+    <div class="result-actions">
+      <button class="btn-outline" onclick="restart()">↺ Retake quiz</button>
+      <button class="btn-primary" onclick="copyResult()">Copy my result</button>
+    </div>
+    <p class="submit-status" id="submit-status"></p>
+  </div>
+</div>
+
+<script>
+const SHEET_URL = "https://script.google.com/macros/s/AKfycbx94L5PPe2NAME2iBa_PC1X-_sYcrE4Fi-6DHF8gpD8r_rPCPZfYDRjntKzGe8z9Xme/exec";
+
+const questions = [
+  {
+    text: "A surprise all-hands meeting is called with no agenda. Your first thought is…",
+    options: [
+      { text: "Finally, a chance to share my latest idea!", type: "visionary" },
+      { text: "I hope we get clear action items at the end.", type: "executor" },
+      { text: "I'll make sure everyone feels heard.", type: "harmonizer" },
+      { text: "I'm already mentally preparing three possible scenarios.", type: "strategist" }
+    ]
+  },
+  {
+    text: "Your team's project is behind schedule. You instinctively…",
+    options: [
+      { text: "Propose a bold, unconventional fix to get back on track.", type: "visionary" },
+      { text: "Break the problem into tasks and start assigning them.", type: "executor" },
+      { text: "Check in with each person to see who needs support.", type: "harmonizer" },
+      { text: "Map out the risks and build a recovery plan first.", type: "strategist" }
+    ]
+  },
+  {
+    text: "Your ideal desk setup is…",
+    options: [
+      { text: "Covered in colourful sticky notes and half-finished sketches.", type: "visionary" },
+      { text: "Clean, with a to-do list front and centre.", type: "executor" },
+      { text: "Has a plant, some photos, and is near the team.", type: "harmonizer" },
+      { text: "Has a whiteboard nearby for diagrams and frameworks.", type: "strategist" }
+    ]
+  },
+  {
+    text: "When giving feedback, you tend to…",
+    options: [
+      { text: "Inspire them with what's possible if they level up.", type: "visionary" },
+      { text: "Give specific, direct points with clear next steps.", type: "executor" },
+      { text: "Sandwich it kindly and focus on encouragement.", type: "harmonizer" },
+      { text: "Present it as data — here's the pattern I'm seeing.", type: "strategist" }
+    ]
+  },
+  {
+    text: "The most satisfying part of finishing a project is…",
+    options: [
+      { text: "Seeing a wild idea become reality.", type: "visionary" },
+      { text: "Ticking the final item off the list.", type: "executor" },
+      { text: "Celebrating together as a team.", type: "harmonizer" },
+      { text: "Running the retrospective to learn for next time.", type: "strategist" }
+    ]
+  }
+];
+
+const results = {
+  visionary: {
+    emoji: "🚀", label: "The Visionary",
+    desc: "You see possibilities others miss and love pushing boundaries. Your energy is contagious — just remember to loop in the planners so your brilliant ideas actually land."
+  },
+  executor: {
+    emoji: "⚡", label: "The Executor",
+    desc: "You get things done, full stop. You're the engine of any team, turning vague goals into ticked checkboxes. Your superpower: making the impossible feel manageable."
+  },
+  harmonizer: {
+    emoji: "🌱", label: "The Harmonizer",
+    desc: "You're the glue of the team. You notice when morale dips before anyone else does, and your empathy makes the whole team feel safe to do their best work."
+  },
+  strategist: {
+    emoji: "🧩", label: "The Strategist",
+    desc: "You're three steps ahead — always. You see patterns, anticipate risks, and love a good framework. Teams rely on you to bring calm, structured thinking to chaos."
+  }
+};
+
+let current = 0;
+let scores = { visionary: 0, executor: 0, harmonizer: 0, strategist: 0 };
+let answers = {};
+let selectedType = null;
+
+function render() {
+  const q = questions[current];
+  const pct = Math.round((current / questions.length) * 100);
+  document.getElementById('q-counter').textContent = `Question ${current + 1} of ${questions.length}`;
+  document.getElementById('q-pct').textContent = pct + '%';
+  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('q-text').textContent = q.text;
+
+  const opts = document.getElementById('options');
+  opts.innerHTML = '';
+  selectedType = null;
+  document.getElementById('next-btn').style.display = 'none';
+
+  q.options.forEach(o => {
+    const btn = document.createElement('button');
+    btn.className = 'opt';
+    btn.innerHTML = `<span class="opt-dot"></span><span class="opt-label">${o.text}</span>`;
+    btn.onclick = () => select(btn, o.type, o.text);
+    opts.appendChild(btn);
+  });
+}
+
+function select(btn, type, text) {
+  document.querySelectorAll('.opt').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  selectedType = type;
+  answers[`q${current + 1}`] = text;
+  document.getElementById('next-btn').style.display = 'inline-block';
+}
+
+function nextQ() {
+  if (!selectedType) return;
+  scores[selectedType]++;
+  current++;
+  if (current < questions.length) {
+    render();
+  } else {
+    showResult();
+  }
+}
+
+function showResult() {
+  document.getElementById('progress-fill').style.width = '100%';
+  document.getElementById('q-pct').textContent = '100%';
+  document.getElementById('q-counter').textContent = 'Complete!';
+
+  const winner = Object.entries(scores).sort((a, b) => b[1] - a[1])[0][0];
+  const r = results[winner];
+
+  document.getElementById('quiz-area').style.display = 'none';
+  const wrap = document.getElementById('result-wrap');
+  wrap.style.display = 'block';
+  wrap.className = 'result-wrap type-' + winner;
+
+  document.getElementById('r-emoji').textContent = r.emoji;
+  document.getElementById('r-type').textContent = 'Your personality type';
+  document.getElementById('r-title').textContent = r.label;
+  document.getElementById('r-desc').textContent = r.desc;
+
+  submitToSheets(winner);
+}
+
+function submitToSheets(result) {
+  const status = document.getElementById('submit-status');
+  status.textContent = 'Saving your result…';
+  status.className = 'submit-status';
+
+  const payload = {
+    q1: answers.q1 || '',
+    q2: answers.q2 || '',
+    q3: answers.q3 || '',
+    q4: answers.q4 || '',
+    q5: answers.q5 || '',
+    result: results[result].label
+  };
+
+  fetch(SHEET_URL, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  })
+  .then(() => {
+    status.textContent = '✓ Your response has been recorded.';
+    status.className = 'submit-status success';
+  })
+  .catch(() => {
+    status.textContent = 'Could not save response. Please check your connection.';
+    status.className = 'submit-status error';
+  });
+}
+
+function copyResult() {
+  const title = document.getElementById('r-title').textContent;
+  const desc = document.getElementById('r-desc').textContent;
+  const emoji = document.getElementById('r-emoji').textContent;
+  navigator.clipboard.writeText(`${emoji} I'm ${title}!\n\n${desc}`).then(() => {
+    const btn = document.querySelector('.btn-primary');
+    btn.textContent = '✓ Copied!';
+    setTimeout(() => { btn.textContent = 'Copy my result'; }, 2000);
+  });
+}
+
+function restart() {
+  current = 0;
+  scores = { visionary: 0, executor: 0, harmonizer: 0, strategist: 0 };
+  answers = {};
+  selectedType = null;
+  document.getElementById('result-wrap').style.display = 'none';
+  document.getElementById('quiz-area').style.display = 'block';
+  render();
+}
+
+render();
+</script>
+</body>
+</html>
