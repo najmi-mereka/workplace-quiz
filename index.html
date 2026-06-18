@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ms">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>What's Your Workplace Personality?</title>
+<title>Kuiz Personaliti Tempat Kerja / Workplace Personality Quiz</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   :root {
     --purple-light: #EEEDFE;
     --purple-mid: #7F77DD;
@@ -24,7 +23,6 @@
     --border: #e4e4e0;
     --white: #ffffff;
   }
-
   body {
     font-family: 'Inter', sans-serif;
     background: var(--gray-bg);
@@ -35,312 +33,195 @@
     align-items: center;
     padding: 2rem 1rem 4rem;
   }
-
-  .header {
-    text-align: center;
-    max-width: 560px;
-    margin-bottom: 2.5rem;
-  }
-
+  .header { text-align: center; max-width: 560px; margin-bottom: 2.5rem; }
   .eyebrow {
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--purple-mid);
-    margin-bottom: 0.75rem;
+    font-size: 11px; font-weight: 600; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--purple-mid); margin-bottom: 0.75rem;
   }
-
   h1 {
     font-family: 'DM Serif Display', serif;
-    font-size: clamp(28px, 5vw, 42px);
-    font-weight: 400;
-    line-height: 1.2;
-    color: var(--text-primary);
-    margin-bottom: 0.75rem;
+    font-size: clamp(26px, 5vw, 40px);
+    font-weight: 400; line-height: 1.2;
+    color: var(--text-primary); margin-bottom: 0.5rem;
   }
-
-  .subtitle {
-    font-size: 15px;
-    color: var(--text-secondary);
-    line-height: 1.7;
-  }
-
+  .h1-sub { font-family: 'Inter', sans-serif; font-size: 14px; color: var(--text-secondary); margin-bottom: 0.75rem; }
+  .subtitle { font-size: 14px; color: var(--text-secondary); line-height: 1.7; }
   .card {
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 2rem;
-    width: 100%;
-    max-width: 580px;
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: 16px; padding: 2rem; width: 100%; max-width: 580px;
   }
-
-  .progress-wrap {
-    margin-bottom: 1.75rem;
-  }
-
+  .progress-wrap { margin-bottom: 1.75rem; }
   .progress-meta {
-    display: flex;
-    justify-content: space-between;
-    font-size: 12px;
-    color: var(--text-secondary);
-    margin-bottom: 8px;
+    display: flex; justify-content: space-between;
+    font-size: 12px; color: var(--text-secondary); margin-bottom: 8px;
   }
-
-  .progress-track {
-    height: 3px;
-    background: #ebebeb;
-    border-radius: 99px;
-    overflow: hidden;
-  }
-
+  .progress-track { height: 3px; background: #ebebeb; border-radius: 99px; overflow: hidden; }
   .progress-fill {
-    height: 100%;
-    background: var(--purple-mid);
-    border-radius: 99px;
-    transition: width 0.5s cubic-bezier(0.4,0,0.2,1);
+    height: 100%; background: var(--purple-mid);
+    border-radius: 99px; transition: width 0.5s cubic-bezier(0.4,0,0.2,1);
   }
+  .question-type-tag {
+    display: inline-block; font-size: 10px; font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 3px 10px; border-radius: 99px; margin-bottom: 1rem;
+  }
+  .tag-fun { background: var(--purple-light); color: var(--purple-dark); }
+  .tag-survey { background: var(--teal-light); color: #085041; }
 
   .question-text {
-    font-family: 'DM Serif Display', serif;
-    font-size: 20px;
-    font-weight: 400;
-    line-height: 1.45;
-    color: var(--text-primary);
-    margin-bottom: 1.5rem;
+    font-family: 'DM Serif Display', serif; font-size: 19px;
+    font-weight: 400; line-height: 1.45; color: var(--text-primary); margin-bottom: 0.25rem;
   }
-
-  .options {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+  .question-text-ms {
+    font-size: 13px; color: var(--text-secondary);
+    font-style: italic; margin-bottom: 1.25rem; line-height: 1.5;
   }
-
+  .options { display: flex; flex-direction: column; gap: 10px; }
   .opt {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    padding: 14px 16px;
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    cursor: pointer;
+    display: flex; align-items: flex-start; gap: 12px;
+    padding: 13px 16px; border: 1px solid var(--border);
+    border-radius: 10px; cursor: pointer;
     transition: border-color 0.15s, background 0.15s;
-    background: var(--white);
-    text-align: left;
-    width: 100%;
+    background: var(--white); text-align: left; width: 100%;
     font-family: 'Inter', sans-serif;
   }
-
   .opt:hover { border-color: #c4c2f0; background: #fafafa; }
-
-  .opt.selected {
-    border-color: var(--purple-mid);
-    background: var(--purple-light);
-  }
-
+  .opt.selected { border-color: var(--purple-mid); background: var(--purple-light); }
   .opt-dot {
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
-    border: 1.5px solid var(--border);
-    flex-shrink: 0;
-    margin-top: 1px;
-    transition: all 0.15s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    width: 18px; height: 18px; border-radius: 50%;
+    border: 1.5px solid var(--border); flex-shrink: 0;
+    margin-top: 2px; transition: all 0.15s;
+    display: flex; align-items: center; justify-content: center;
   }
-
-  .opt.selected .opt-dot {
-    border-color: var(--purple-mid);
-    background: var(--purple-mid);
-  }
-
+  .opt.selected .opt-dot { border-color: var(--purple-mid); background: var(--purple-mid); }
   .opt.selected .opt-dot::after {
-    content: '';
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: white;
+    content: ''; width: 6px; height: 6px;
+    border-radius: 50%; background: white;
   }
-
-  .opt-label {
-    font-size: 14px;
-    line-height: 1.6;
-    color: var(--text-primary);
-  }
-
+  .opt-label { font-size: 14px; line-height: 1.55; color: var(--text-primary); }
+  .opt-label-ms { font-size: 12px; color: var(--text-secondary); font-style: italic; margin-top: 2px; }
   .opt.selected .opt-label { color: var(--purple-dark); }
 
-  .next-wrap {
-    margin-top: 1.5rem;
-    display: flex;
-    justify-content: flex-end;
+  /* Dropdown question */
+  .dropdown-wrap { margin-top: 0.25rem; }
+  .styled-select {
+    width: 100%; padding: 12px 16px;
+    border: 1px solid var(--border); border-radius: 10px;
+    font-size: 14px; font-family: 'Inter', sans-serif;
+    color: var(--text-primary); background: var(--white);
+    appearance: none; cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b6b6b' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    transition: border-color 0.15s;
   }
+  .styled-select:focus { outline: none; border-color: var(--purple-mid); }
+  .styled-select.selected-val { border-color: var(--purple-mid); background-color: var(--purple-light); }
 
+  .next-wrap { margin-top: 1.5rem; display: flex; justify-content: flex-end; }
   .next-btn {
-    padding: 11px 28px;
-    background: var(--purple-mid);
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 14px;
-    font-weight: 500;
-    cursor: pointer;
-    display: none;
+    padding: 11px 28px; background: var(--purple-mid); color: white;
+    border: none; border-radius: 8px; font-size: 14px; font-weight: 500;
+    cursor: pointer; display: none;
     transition: background 0.15s, transform 0.1s;
     font-family: 'Inter', sans-serif;
   }
-
   .next-btn:hover { background: var(--purple-dark); }
   .next-btn:active { transform: scale(0.98); }
 
-  /* Result card */
+  /* Result */
   .result-wrap { display: none; text-align: center; }
-
   .result-badge {
-    display: inline-block;
-    width: 72px;
-    height: 72px;
-    border-radius: 50%;
-    font-size: 32px;
-    line-height: 72px;
-    margin-bottom: 1.25rem;
+    display: inline-block; width: 72px; height: 72px;
+    border-radius: 50%; font-size: 32px; line-height: 72px; margin-bottom: 1.25rem;
   }
-
   .result-type {
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    margin-bottom: 0.5rem;
+    font-size: 11px; font-weight: 600; letter-spacing: 0.12em;
+    text-transform: uppercase; margin-bottom: 0.5rem;
   }
-
-  .result-title {
-    font-family: 'DM Serif Display', serif;
-    font-size: 30px;
-    font-weight: 400;
-    margin-bottom: 1rem;
-  }
-
-  .result-desc {
-    font-size: 15px;
-    color: var(--text-secondary);
-    line-height: 1.75;
-    max-width: 420px;
-    margin: 0 auto 1.75rem;
-  }
-
-  .result-divider {
-    border: none;
-    border-top: 1px solid var(--border);
-    margin: 1.5rem 0;
-  }
-
-  .result-actions {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-
+  .result-title { font-family: 'DM Serif Display', serif; font-size: 28px; font-weight: 400; margin-bottom: 0.25rem; }
+  .result-title-ms { font-size: 14px; color: var(--text-secondary); font-style: italic; margin-bottom: 1rem; }
+  .result-desc { font-size: 14px; color: var(--text-primary); line-height: 1.75; max-width: 420px; margin: 0 auto 0.75rem; }
+  .result-desc-ms { font-size: 13px; color: var(--text-secondary); font-style: italic; line-height: 1.75; max-width: 420px; margin: 0 auto 1.5rem; }
+  .result-divider { border: none; border-top: 1px solid var(--border); margin: 1.5rem 0; }
+  .result-actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
   .btn-outline {
-    padding: 10px 22px;
-    background: transparent;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    font-size: 13px;
-    font-weight: 500;
-    cursor: pointer;
-    color: var(--text-primary);
-    font-family: 'Inter', sans-serif;
+    padding: 10px 22px; background: transparent;
+    border: 1px solid var(--border); border-radius: 8px;
+    font-size: 13px; font-weight: 500; cursor: pointer;
+    color: var(--text-primary); font-family: 'Inter', sans-serif;
     transition: background 0.15s;
   }
   .btn-outline:hover { background: var(--gray-bg); }
-
   .btn-primary {
-    padding: 10px 22px;
-    background: var(--purple-mid);
-    border: none;
-    border-radius: 8px;
-    font-size: 13px;
-    font-weight: 500;
-    cursor: pointer;
-    color: white;
-    font-family: 'Inter', sans-serif;
+    padding: 10px 22px; background: var(--purple-mid); border: none;
+    border-radius: 8px; font-size: 13px; font-weight: 500;
+    cursor: pointer; color: white; font-family: 'Inter', sans-serif;
     transition: background 0.15s;
   }
   .btn-primary:hover { background: var(--purple-dark); }
-
-  /* Submitting state */
-  .submit-status {
-    font-size: 13px;
-    color: var(--text-secondary);
-    margin-top: 1rem;
-    min-height: 20px;
-    text-align: center;
-  }
-
+  .submit-status { font-size: 13px; color: var(--text-secondary); margin-top: 1rem; min-height: 20px; text-align: center; }
   .submit-status.success { color: var(--teal-mid); }
   .submit-status.error { color: var(--coral-mid); }
 
-  /* Personality colors */
   .type-visionary .result-badge { background: var(--purple-light); }
   .type-visionary .result-type { color: var(--purple-mid); }
   .type-visionary .result-title { color: var(--purple-dark); }
-
   .type-executor .result-badge { background: var(--amber-light); }
   .type-executor .result-type { color: var(--amber-mid); }
   .type-executor .result-title { color: #633806; }
-
   .type-harmonizer .result-badge { background: var(--teal-light); }
   .type-harmonizer .result-type { color: var(--teal-mid); }
   .type-harmonizer .result-title { color: #085041; }
-
   .type-strategist .result-badge { background: var(--coral-light); }
   .type-strategist .result-type { color: var(--coral-mid); }
   .type-strategist .result-title { color: #711B13; }
 
   @media (max-width: 480px) {
     .card { padding: 1.5rem; }
-    .question-text { font-size: 18px; }
+    .question-text { font-size: 17px; }
   }
 </style>
 </head>
 <body>
 
 <div class="header">
-  <div class="eyebrow">Workplace Personality Quiz</div>
+  <div class="eyebrow">MTA Program Survey · Kuiz Program MTA</div>
   <h1>What kind of colleague are you?</h1>
-  <p class="subtitle">5 quick questions. Find out which workplace personality type fits you best.</p>
+  <p class="h1-sub">Apa jenis rakan sekerja anda?</p>
+  <p class="subtitle">9 quick questions — find your workplace personality and help us learn more about you.<br><em style="font-size:13px">9 soalan ringkas — temui personaliti tempat kerja anda dan bantu kami kenali anda lebih baik.</em></p>
 </div>
 
 <div class="card" id="quiz-card">
   <div class="progress-wrap">
     <div class="progress-meta">
-      <span id="q-counter">Question 1 of 5</span>
+      <span id="q-counter">Soalan / Question 1 of 9</span>
       <span id="q-pct">0%</span>
     </div>
     <div class="progress-track"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
   </div>
 
   <div id="quiz-area">
-    <p class="question-text" id="q-text"></p>
+    <div id="q-tag" class="question-type-tag tag-fun"></div>
+    <p class="question-text" id="q-text-en"></p>
+    <p class="question-text-ms" id="q-text-ms"></p>
     <div class="options" id="options"></div>
     <div class="next-wrap">
-      <button class="next-btn" id="next-btn" onclick="nextQ()">Next →</button>
+      <button class="next-btn" id="next-btn" onclick="nextQ()">Seterusnya / Next →</button>
     </div>
   </div>
 
   <div class="result-wrap" id="result-wrap">
     <div class="result-badge" id="r-emoji"></div>
-    <div class="result-type" id="r-type"></div>
+    <div class="result-type" id="r-type">Personaliti anda / Your personality type</div>
     <h2 class="result-title" id="r-title"></h2>
+    <p class="result-title-ms" id="r-title-ms"></p>
     <p class="result-desc" id="r-desc"></p>
+    <p class="result-desc-ms" id="r-desc-ms"></p>
     <hr class="result-divider">
     <div class="result-actions">
-      <button class="btn-outline" onclick="restart()">↺ Retake quiz</button>
-      <button class="btn-primary" onclick="copyResult()">Copy my result</button>
+      <button class="btn-outline" onclick="restart()">↺ Cuba semula / Retake</button>
+      <button class="btn-primary" onclick="copyResult()">Salin keputusan / Copy result</button>
     </div>
     <p class="submit-status" id="submit-status"></p>
   </div>
@@ -350,110 +231,245 @@
 const SHEET_URL = "https://script.google.com/macros/s/AKfycbx94L5PPe2NAME2iBa_PC1X-_sYcrE4Fi-6DHF8gpD8r_rPCPZfYDRjntKzGe8z9Xme/exec";
 
 const questions = [
+  // Q1 — Fun
   {
-    text: "A surprise all-hands meeting is called with no agenda. Your first thought is…",
+    kind: "fun",
+    en: "A surprise all-hands meeting is called with no agenda. Your first thought is…",
+    ms: "Mesyuarat mengejut diadakan tanpa agenda. Fikiran pertama anda ialah…",
     options: [
-      { text: "Finally, a chance to share my latest idea!", type: "visionary" },
-      { text: "I hope we get clear action items at the end.", type: "executor" },
-      { text: "I'll make sure everyone feels heard.", type: "harmonizer" },
-      { text: "I'm already mentally preparing three possible scenarios.", type: "strategist" }
+      { en: "Finally, a chance to share my latest idea!", ms: "Akhirnya, peluang untuk kongsikan idea terbaru saya!", type: "visionary" },
+      { en: "I hope we get clear action items at the end.", ms: "Harap ada perkara tindakan yang jelas di penghujungnya.", type: "executor" },
+      { en: "I'll make sure everyone feels heard.", ms: "Saya akan pastikan semua orang rasa didengar.", type: "harmonizer" },
+      { en: "I'm already mentally preparing three possible scenarios.", ms: "Saya sudah sediakan tiga senario yang mungkin berlaku.", type: "strategist" }
     ]
   },
+  // Q2 — Survey
   {
-    text: "Your team's project is behind schedule. You instinctively…",
+    kind: "survey",
+    key: "status",
+    en: "What's your current status right now?",
+    ms: "Apakah status semasa anda sekarang?",
     options: [
-      { text: "Propose a bold, unconventional fix to get back on track.", type: "visionary" },
-      { text: "Break the problem into tasks and start assigning them.", type: "executor" },
-      { text: "Check in with each person to see who needs support.", type: "harmonizer" },
-      { text: "Map out the risks and build a recovery plan first.", type: "strategist" }
+      { en: "Working full-time", ms: "Bekerja sepenuh masa" },
+      { en: "Working part-time / freelance", ms: "Bekerja separuh masa / bebas" },
+      { en: "Still studying / furthering my education", ms: "Masih belajar / melanjutkan pelajaran" },
+      { en: "Currently looking for opportunities", ms: "Sedang mencari peluang pekerjaan" }
     ]
   },
+  // Q3 — Fun
   {
-    text: "Your ideal desk setup is…",
+    kind: "fun",
+    en: "Your team's project is behind schedule. You instinctively…",
+    ms: "Projek pasukan anda lewat. Secara naluri, anda…",
     options: [
-      { text: "Covered in colourful sticky notes and half-finished sketches.", type: "visionary" },
-      { text: "Clean, with a to-do list front and centre.", type: "executor" },
-      { text: "Has a plant, some photos, and is near the team.", type: "harmonizer" },
-      { text: "Has a whiteboard nearby for diagrams and frameworks.", type: "strategist" }
+      { en: "Propose a bold, unconventional fix to get back on track.", ms: "Cadangkan penyelesaian berani dan luar biasa untuk kembali ke landasan.", type: "visionary" },
+      { en: "Break the problem into tasks and start assigning them.", ms: "Pecahkan masalah kepada tugas dan mula agihkannya.", type: "executor" },
+      { en: "Check in with each person to see who needs support.", ms: "Semak dengan setiap ahli pasukan untuk tahu siapa yang perlukan sokongan.", type: "harmonizer" },
+      { en: "Map out the risks and build a recovery plan first.", ms: "Kenal pasti risiko dan bina pelan pemulihan dahulu.", type: "strategist" }
     ]
   },
+  // Q4 — Survey
   {
-    text: "When giving feedback, you tend to…",
+    kind: "survey",
+    key: "industry",
+    en: "If you're currently working, what industry are you in?",
+    ms: "Jika anda sedang bekerja, apakah industri anda?",
+    type: "dropdown",
     options: [
-      { text: "Inspire them with what's possible if they level up.", type: "visionary" },
-      { text: "Give specific, direct points with clear next steps.", type: "executor" },
-      { text: "Sandwich it kindly and focus on encouragement.", type: "harmonizer" },
-      { text: "Present it as data — here's the pattern I'm seeing.", type: "strategist" }
+      { en: "Finance", ms: "Kewangan" },
+      { en: "Tech", ms: "Teknologi" },
+      { en: "Retail", ms: "Runcit" },
+      { en: "Healthcare", ms: "Penjagaan Kesihatan" },
+      { en: "Education", ms: "Pendidikan" },
+      { en: "F&B", ms: "Makanan & Minuman" },
+      { en: "Media", ms: "Media" },
+      { en: "Others", ms: "Lain-lain" },
+      { en: "Not applicable", ms: "Tidak berkenaan" }
     ]
   },
+  // Q5 — Fun
   {
-    text: "The most satisfying part of finishing a project is…",
+    kind: "fun",
+    en: "Your ideal desk setup is…",
+    ms: "Susunan meja ideal anda ialah…",
     options: [
-      { text: "Seeing a wild idea become reality.", type: "visionary" },
-      { text: "Ticking the final item off the list.", type: "executor" },
-      { text: "Celebrating together as a team.", type: "harmonizer" },
-      { text: "Running the retrospective to learn for next time.", type: "strategist" }
+      { en: "Covered in colourful sticky notes and half-finished sketches.", ms: "Penuh nota warna-warni dan lakaran separuh siap.", type: "visionary" },
+      { en: "Clean, with a to-do list front and centre.", ms: "Kemas, dengan senarai tugasan di hadapan.", type: "executor" },
+      { en: "Has a plant, some photos, and is near the team.", ms: "Ada pokok, beberapa gambar, dan berdekatan pasukan.", type: "harmonizer" },
+      { en: "Has a whiteboard nearby for diagrams and frameworks.", ms: "Ada papan putih berhampiran untuk gambar rajah dan rangka kerja.", type: "strategist" }
+    ]
+  },
+  // Q6 — Survey
+  {
+    kind: "survey",
+    key: "income",
+    en: "What's your current monthly income range?",
+    ms: "Apakah julat pendapatan bulanan semasa anda?",
+    options: [
+      { en: "Below RM1,500", ms: "Bawah RM1,500" },
+      { en: "RM1,500 – RM2,499", ms: "RM1,500 – RM2,499" },
+      { en: "RM2,500 – RM3,499", ms: "RM2,500 – RM3,499" },
+      { en: "RM3,500 – RM4,999", ms: "RM3,500 – RM4,999" },
+      { en: "RM5,000 and above", ms: "RM5,000 ke atas" },
+      { en: "Not applicable (studying / not working yet)", ms: "Tidak berkenaan (masih belajar / belum bekerja)" }
+    ]
+  },
+  // Q7 — Fun
+  {
+    kind: "fun",
+    en: "When giving feedback, you tend to…",
+    ms: "Ketika memberi maklum balas, anda biasanya…",
+    options: [
+      { en: "Inspire them with what's possible if they level up.", ms: "Memotivasikan mereka dengan potensi yang ada jika mereka berkembang.", type: "visionary" },
+      { en: "Give specific, direct points with clear next steps.", ms: "Memberi poin khusus dan langsung dengan langkah seterusnya yang jelas.", type: "executor" },
+      { en: "Sandwich it kindly and focus on encouragement.", ms: "Menyampaikannya dengan baik dan memberi tumpuan kepada dorongan.", type: "harmonizer" },
+      { en: "Present it as data — here's the pattern I'm seeing.", ms: "Menyampaikannya sebagai data — ini corak yang saya perhatikan.", type: "strategist" }
+    ]
+  },
+  // Q8 — Survey
+  {
+    kind: "survey",
+    key: "mta_helped",
+    en: "Has the MTA program helped you in your career journey so far?",
+    ms: "Adakah program MTA membantu perjalanan kerjaya anda setakat ini?",
+    options: [
+      { en: "Definitely yes", ms: "Ya, sudah tentu" },
+      { en: "Somewhat yes", ms: "Agak ya" },
+      { en: "Not sure yet", ms: "Belum pasti lagi" },
+      { en: "Not really", ms: "Tidak begitu" }
+    ]
+  },
+  // Q9 — Fun
+  {
+    kind: "fun",
+    en: "The most satisfying part of finishing a project is…",
+    ms: "Bahagian paling memuaskan selepas menyiapkan projek ialah…",
+    options: [
+      { en: "Seeing a wild idea become reality.", ms: "Melihat idea gila menjadi kenyataan.", type: "visionary" },
+      { en: "Ticking the final item off the list.", ms: "Menanda perkara terakhir dalam senarai.", type: "executor" },
+      { en: "Celebrating together as a team.", ms: "Meraikan bersama-sama sebagai satu pasukan.", type: "harmonizer" },
+      { en: "Running the retrospective to learn for next time.", ms: "Menjalankan ulasan untuk belajar bagi projek akan datang.", type: "strategist" }
     ]
   }
 ];
 
 const results = {
   visionary: {
-    emoji: "🚀", label: "The Visionary",
-    desc: "You see possibilities others miss and love pushing boundaries. Your energy is contagious — just remember to loop in the planners so your brilliant ideas actually land."
+    emoji: "🚀",
+    en: "The Visionary", ms: "Si Visioner",
+    descEn: "You see possibilities others miss and love pushing boundaries. Your energy is contagious — just remember to loop in the planners so your brilliant ideas actually land.",
+    descMs: "Anda nampak peluang yang orang lain terlepas pandang dan suka menolak batasan. Semangat anda menular — cuma ingat untuk libatkan perancang agar idea brillian anda benar-benar terlaksana."
   },
   executor: {
-    emoji: "⚡", label: "The Executor",
-    desc: "You get things done, full stop. You're the engine of any team, turning vague goals into ticked checkboxes. Your superpower: making the impossible feel manageable."
+    emoji: "⚡",
+    en: "The Executor", ms: "Si Pelaksana",
+    descEn: "You get things done, full stop. You're the engine of any team, turning vague goals into ticked checkboxes. Your superpower: making the impossible feel manageable.",
+    descMs: "Anda menyiapkan kerja, titik. Anda adalah enjin pasukan, menukar matlamat kabur menjadi kotak yang ditanda. Kuasa super anda: menjadikan yang mustahil terasa boleh dilakukan."
   },
   harmonizer: {
-    emoji: "🌱", label: "The Harmonizer",
-    desc: "You're the glue of the team. You notice when morale dips before anyone else does, and your empathy makes the whole team feel safe to do their best work."
+    emoji: "🌱",
+    en: "The Harmonizer", ms: "Si Pengharmoni",
+    descEn: "You're the glue of the team. You notice when morale dips before anyone else does, and your empathy makes the whole team feel safe to do their best work.",
+    descMs: "Anda adalah perekat pasukan. Anda perasan bila semangat pasukan menurun sebelum orang lain sedar, dan empati anda menjadikan seluruh pasukan rasa selamat untuk melakukan kerja terbaik mereka."
   },
   strategist: {
-    emoji: "🧩", label: "The Strategist",
-    desc: "You're three steps ahead — always. You see patterns, anticipate risks, and love a good framework. Teams rely on you to bring calm, structured thinking to chaos."
+    emoji: "🧩",
+    en: "The Strategist", ms: "Si Ahli Strategi",
+    descEn: "You're three steps ahead — always. You see patterns, anticipate risks, and love a good framework. Teams rely on you to bring calm, structured thinking to chaos.",
+    descMs: "Anda sentiasa tiga langkah ke hadapan. Anda nampak corak, jangkakan risiko, dan sukakan rangka kerja yang baik. Pasukan bergantung kepada anda untuk membawa pemikiran tenang dan berstruktur ketika keadaan huru-hara."
   }
 };
 
 let current = 0;
 let scores = { visionary: 0, executor: 0, harmonizer: 0, strategist: 0 };
 let answers = {};
-let selectedType = null;
+let selectedValue = null;
 
 function render() {
   const q = questions[current];
-  const pct = Math.round((current / questions.length) * 100);
-  document.getElementById('q-counter').textContent = `Question ${current + 1} of ${questions.length}`;
+  const total = questions.length;
+  const pct = Math.round((current / total) * 100);
+  document.getElementById('q-counter').textContent = `Soalan / Question ${current + 1} of ${total}`;
   document.getElementById('q-pct').textContent = pct + '%';
   document.getElementById('progress-fill').style.width = pct + '%';
-  document.getElementById('q-text').textContent = q.text;
+
+  const tag = document.getElementById('q-tag');
+  if (q.kind === 'fun') {
+    tag.textContent = '✨ Soalan Personaliti / Personality Question';
+    tag.className = 'question-type-tag tag-fun';
+  } else {
+    tag.textContent = '📋 Soalan Kaji Selidik / Survey Question';
+    tag.className = 'question-type-tag tag-survey';
+  }
+
+  document.getElementById('q-text-en').textContent = q.en;
+  document.getElementById('q-text-ms').textContent = q.ms;
+
+  selectedValue = null;
+  document.getElementById('next-btn').style.display = 'none';
 
   const opts = document.getElementById('options');
   opts.innerHTML = '';
-  selectedType = null;
-  document.getElementById('next-btn').style.display = 'none';
 
-  q.options.forEach(o => {
-    const btn = document.createElement('button');
-    btn.className = 'opt';
-    btn.innerHTML = `<span class="opt-dot"></span><span class="opt-label">${o.text}</span>`;
-    btn.onclick = () => select(btn, o.type, o.text);
-    opts.appendChild(btn);
-  });
+  if (q.type === 'dropdown') {
+    const wrap = document.createElement('div');
+    wrap.className = 'dropdown-wrap';
+    const sel = document.createElement('select');
+    sel.className = 'styled-select';
+    sel.id = 'dropdown-sel';
+    const placeholder = document.createElement('option');
+    placeholder.value = '';
+    placeholder.textContent = '— Pilih / Select —';
+    placeholder.disabled = true;
+    placeholder.selected = true;
+    sel.appendChild(placeholder);
+    q.options.forEach(o => {
+      const opt = document.createElement('option');
+      opt.value = o.en;
+      opt.textContent = `${o.ms} / ${o.en}`;
+      sel.appendChild(opt);
+    });
+    sel.onchange = () => {
+      if (sel.value) {
+        selectedValue = sel.value;
+        sel.classList.add('selected-val');
+        document.getElementById('next-btn').style.display = 'inline-block';
+      }
+    };
+    wrap.appendChild(sel);
+    opts.appendChild(wrap);
+  } else {
+    q.options.forEach(o => {
+      const btn = document.createElement('button');
+      btn.className = 'opt';
+      btn.innerHTML = `
+        <span class="opt-dot"></span>
+        <span>
+          <div class="opt-label">${o.en}</div>
+          <div class="opt-label-ms">${o.ms}</div>
+        </span>`;
+      btn.onclick = () => selectOpt(btn, o);
+      opts.appendChild(btn);
+    });
+  }
 }
 
-function select(btn, type, text) {
+function selectOpt(btn, o) {
   document.querySelectorAll('.opt').forEach(b => b.classList.remove('selected'));
   btn.classList.add('selected');
-  selectedType = type;
-  answers[`q${current + 1}`] = text;
+  selectedValue = o.en;
   document.getElementById('next-btn').style.display = 'inline-block';
+  if (o.type) {
+    scores[o.type]++;
+  }
 }
 
 function nextQ() {
-  if (!selectedType) return;
-  scores[selectedType]++;
+  if (!selectedValue) return;
+  const q = questions[current];
+  if (q.kind === 'survey') {
+    answers[q.key] = selectedValue;
+  }
   current++;
   if (current < questions.length) {
     render();
@@ -465,7 +481,7 @@ function nextQ() {
 function showResult() {
   document.getElementById('progress-fill').style.width = '100%';
   document.getElementById('q-pct').textContent = '100%';
-  document.getElementById('q-counter').textContent = 'Complete!';
+  document.getElementById('q-counter').textContent = 'Selesai / Complete!';
 
   const winner = Object.entries(scores).sort((a, b) => b[1] - a[1])[0][0];
   const r = results[winner];
@@ -476,25 +492,25 @@ function showResult() {
   wrap.className = 'result-wrap type-' + winner;
 
   document.getElementById('r-emoji').textContent = r.emoji;
-  document.getElementById('r-type').textContent = 'Your personality type';
-  document.getElementById('r-title').textContent = r.label;
-  document.getElementById('r-desc').textContent = r.desc;
+  document.getElementById('r-title').textContent = r.en;
+  document.getElementById('r-title-ms').textContent = r.ms;
+  document.getElementById('r-desc').textContent = r.descEn;
+  document.getElementById('r-desc-ms').textContent = r.descMs;
 
-  submitToSheets(winner);
+  submitToSheets(winner, r.en);
 }
 
-function submitToSheets(result) {
+function submitToSheets(winner, resultLabel) {
   const status = document.getElementById('submit-status');
-  status.textContent = 'Saving your result…';
+  status.textContent = 'Menyimpan jawapan anda… / Saving your response…';
   status.className = 'submit-status';
 
   const payload = {
-    q1: answers.q1 || '',
-    q2: answers.q2 || '',
-    q3: answers.q3 || '',
-    q4: answers.q4 || '',
-    q5: answers.q5 || '',
-    result: results[result].label
+    status: answers.status || '',
+    industry: answers.industry || '',
+    income: answers.income || '',
+    mta_helped: answers.mta_helped || '',
+    personality_result: resultLabel
   };
 
   fetch(SHEET_URL, {
@@ -504,23 +520,25 @@ function submitToSheets(result) {
     body: JSON.stringify(payload)
   })
   .then(() => {
-    status.textContent = '✓ Your response has been recorded.';
+    status.textContent = '✓ Jawapan anda telah direkodkan. / Your response has been recorded.';
     status.className = 'submit-status success';
   })
   .catch(() => {
-    status.textContent = 'Could not save response. Please check your connection.';
+    status.textContent = 'Gagal menyimpan. Sila semak sambungan anda. / Could not save. Please check your connection.';
     status.className = 'submit-status error';
   });
 }
 
 function copyResult() {
   const title = document.getElementById('r-title').textContent;
+  const titleMs = document.getElementById('r-title-ms').textContent;
   const desc = document.getElementById('r-desc').textContent;
+  const descMs = document.getElementById('r-desc-ms').textContent;
   const emoji = document.getElementById('r-emoji').textContent;
-  navigator.clipboard.writeText(`${emoji} I'm ${title}!\n\n${desc}`).then(() => {
+  navigator.clipboard.writeText(`${emoji} I'm ${title} / Saya ${titleMs}!\n\n${desc}\n\n${descMs}`).then(() => {
     const btn = document.querySelector('.btn-primary');
-    btn.textContent = '✓ Copied!';
-    setTimeout(() => { btn.textContent = 'Copy my result'; }, 2000);
+    btn.textContent = '✓ Disalin! / Copied!';
+    setTimeout(() => { btn.textContent = 'Salin keputusan / Copy result'; }, 2000);
   });
 }
 
@@ -528,7 +546,7 @@ function restart() {
   current = 0;
   scores = { visionary: 0, executor: 0, harmonizer: 0, strategist: 0 };
   answers = {};
-  selectedType = null;
+  selectedValue = null;
   document.getElementById('result-wrap').style.display = 'none';
   document.getElementById('quiz-area').style.display = 'block';
   render();
