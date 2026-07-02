@@ -8,179 +8,64 @@
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
-    --purple-light: #EEEDFE;
-    --purple-mid: #7F77DD;
-    --purple-dark: #3C3489;
-    --teal-light: #E1F5EE;
-    --teal-mid: #1D9E75;
-    --coral-light: #FAECE7;
-    --coral-mid: #D85A30;
-    --amber-light: #FAEEDA;
-    --amber-mid: #BA7517;
-    --gray-bg: #F7F7F5;
-    --text-primary: #1a1a1a;
-    --text-secondary: #6b6b6b;
-    --border: #e4e4e0;
-    --white: #ffffff;
+    --purple-light: #EEEDFE; --purple-mid: #7F77DD; --purple-dark: #3C3489;
+    --teal-light: #E1F5EE; --teal-mid: #1D9E75;
+    --coral-light: #FAECE7; --coral-mid: #D85A30;
+    --amber-light: #FAEEDA; --amber-mid: #BA7517;
+    --pink-light: #FDEEF5; --pink-mid: #C2437A;
+    --blue-light: #E8F1FD; --blue-mid: #2C6FD1;
+    --gray-bg: #F7F7F5; --text-primary: #1a1a1a; --text-secondary: #6b6b6b;
+    --border: #e4e4e0; --white: #ffffff;
   }
-  body {
-    font-family: 'Poppins', sans-serif;
-    background: var(--gray-bg);
-    color: var(--text-primary);
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 2rem 1rem 4rem;
-  }
+  body { font-family: 'Inter', sans-serif; background: var(--gray-bg); color: var(--text-primary); min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 2rem 1rem 4rem; }
   .header { text-align: center; max-width: 560px; margin-bottom: 2.5rem; }
-  .eyebrow {
-    font-size: 11px; font-weight: 600; letter-spacing: 0.12em;
-    text-transform: uppercase; color: var(--purple-mid); margin-bottom: 0.75rem;
-  }
-  h1 {
-    font-family: 'Montserrat', sans-serif;
-    font-size: clamp(26px, 5vw, 40px);
-    font-weight: 400; line-height: 1.2;
-    color: var(--text-primary); margin-bottom: 0.5rem;
-  }
-  .h1-sub { font-family: 'Poppins', sans-serif; font-size: 14px; color: var(--text-secondary); margin-bottom: 0.75rem; }
+  .eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--purple-mid); margin-bottom: 0.75rem; }
+  h1 { font-family: 'DM Serif Display', serif; font-size: clamp(26px, 5vw, 40px); font-weight: 400; line-height: 1.2; color: var(--text-primary); margin-bottom: 0.5rem; }
+  .h1-sub { font-family: 'Inter', sans-serif; font-size: 14px; color: var(--text-secondary); margin-bottom: 0.75rem; }
   .subtitle { font-size: 14px; color: var(--text-secondary); line-height: 1.7; }
-  .card {
-    background: var(--white); border: 1px solid var(--border);
-    border-radius: 16px; padding: 2rem; width: 100%; max-width: 580px;
-  }
+  .card { background: var(--white); border: 1px solid var(--border); border-radius: 16px; padding: 2rem; width: 100%; max-width: 580px; }
   .progress-wrap { margin-bottom: 1.75rem; }
-  .progress-meta {
-    display: flex; justify-content: space-between;
-    font-size: 12px; color: var(--text-secondary); margin-bottom: 8px;
-  }
+  .progress-meta { display: flex; justify-content: space-between; font-size: 12px; color: var(--text-secondary); margin-bottom: 8px; }
   .progress-track { height: 3px; background: #ebebeb; border-radius: 99px; overflow: hidden; }
-  .progress-fill {
-    height: 100%; background: var(--purple-mid);
-    border-radius: 99px; transition: width 0.5s cubic-bezier(0.4,0,0.2,1);
-  }
-  .question-type-tag {
-    display: inline-block; font-size: 10px; font-weight: 600;
-    letter-spacing: 0.1em; text-transform: uppercase;
-    padding: 3px 10px; border-radius: 99px; margin-bottom: 1rem;
-  }
+  .progress-fill { height: 100%; background: var(--purple-mid); border-radius: 99px; transition: width 0.5s cubic-bezier(0.4,0,0.2,1); }
+  .question-type-tag { display: inline-block; font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 10px; border-radius: 99px; margin-bottom: 1rem; }
   .tag-fun { background: var(--purple-light); color: var(--purple-dark); }
   .tag-survey { background: var(--teal-light); color: #085041; }
-
-  .question-text {
-    font-family: 'Montserrat', sans-serif; font-size: 19px;
-    font-weight: 400; line-height: 1.45; color: var(--text-primary); margin-bottom: 0.25rem;
-  }
-  .question-text-ms {
-    font-size: 13px; color: var(--text-secondary);
-    font-style: italic; margin-bottom: 1.25rem; line-height: 1.5;
-  }
+  .question-text { font-family: 'DM Serif Display', serif; font-size: 19px; font-weight: 400; line-height: 1.45; color: var(--text-primary); margin-bottom: 0.25rem; }
+  .question-text-ms { font-size: 13px; color: var(--text-secondary); font-style: italic; margin-bottom: 1.25rem; line-height: 1.5; }
   .options { display: flex; flex-direction: column; gap: 10px; }
-  .opt {
-    display: flex; align-items: flex-start; gap: 12px;
-    padding: 13px 16px; border: 1px solid var(--border);
-    border-radius: 10px; cursor: pointer;
-    transition: border-color 0.15s, background 0.15s;
-    background: var(--white); text-align: left; width: 100%;
-    font-family: 'Poppins', sans-serif;
-  }
+  .opt { display: flex; align-items: flex-start; gap: 12px; padding: 13px 16px; border: 1px solid var(--border); border-radius: 10px; cursor: pointer; transition: border-color 0.15s, background 0.15s; background: var(--white); text-align: left; width: 100%; font-family: 'Inter', sans-serif; }
   .opt:hover { border-color: #c4c2f0; background: #fafafa; }
   .opt.selected { border-color: var(--purple-mid); background: var(--purple-light); }
-  .opt-dot {
-    width: 18px; height: 18px; border-radius: 50%;
-    border: 1.5px solid var(--border); flex-shrink: 0;
-    margin-top: 2px; transition: all 0.15s;
-    display: flex; align-items: center; justify-content: center;
-  }
+  .opt-dot { width: 18px; height: 18px; border-radius: 50%; border: 1.5px solid var(--border); flex-shrink: 0; margin-top: 2px; transition: all 0.15s; display: flex; align-items: center; justify-content: center; }
   .opt.selected .opt-dot { border-color: var(--purple-mid); background: var(--purple-mid); }
-  .opt.selected .opt-dot::after {
-    content: ''; width: 6px; height: 6px;
-    border-radius: 50%; background: white;
-  }
+  .opt.selected .opt-dot::after { content: ''; width: 6px; height: 6px; border-radius: 50%; background: white; }
   .opt-label { font-size: 14px; line-height: 1.55; color: var(--text-primary); }
   .opt-label-ms { font-size: 12px; color: var(--text-secondary); font-style: italic; margin-top: 2px; }
   .opt.selected .opt-label { color: var(--purple-dark); }
-
-  /* Dropdown question */
   .dropdown-wrap { margin-top: 0.25rem; }
-  .styled-select {
-    width: 100%; padding: 12px 16px;
-    border: 1px solid var(--border); border-radius: 10px;
-    font-size: 14px; font-family: 'Poppins', sans-serif;
-    color: var(--text-primary); background: var(--white);
-    appearance: none; cursor: pointer;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b6b6b' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 16px center;
-    transition: border-color 0.15s;
-  }
+  .styled-select { width: 100%; padding: 12px 16px; border: 1px solid var(--border); border-radius: 10px; font-size: 14px; font-family: 'Inter', sans-serif; color: var(--text-primary); background: var(--white); appearance: none; cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b6b6b' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 16px center; transition: border-color 0.15s; }
   .styled-select:focus { outline: none; border-color: var(--purple-mid); }
   .styled-select.selected-val { border-color: var(--purple-mid); background-color: var(--purple-light); }
-
   .next-wrap { margin-top: 1.5rem; display: flex; justify-content: flex-end; }
-  .next-btn {
-    padding: 11px 28px; background: var(--purple-mid); color: white;
-    border: none; border-radius: 8px; font-size: 14px; font-weight: 500;
-    cursor: pointer; display: none;
-    transition: background 0.15s, transform 0.1s;
-    font-family: 'Poppins', sans-serif;
-  }
+  .next-btn { padding: 11px 28px; background: var(--purple-mid); color: white; border: none; border-radius: 8px; font-size: 14px; font-weight: 500; cursor: pointer; display: none; transition: background 0.15s, transform 0.1s; font-family: 'Inter', sans-serif; }
   .next-btn:hover { background: var(--purple-dark); }
   .next-btn:active { transform: scale(0.98); }
-
-  /* Result */
   .result-wrap { display: none; text-align: center; }
-  .result-badge {
-    display: inline-block; width: 72px; height: 72px;
-    border-radius: 50%; font-size: 32px; line-height: 72px; margin-bottom: 1.25rem;
-  }
-  .result-type {
-    font-size: 11px; font-weight: 600; letter-spacing: 0.12em;
-    text-transform: uppercase; margin-bottom: 0.5rem;
-  }
-  .result-title { font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 400; margin-bottom: 0.25rem; }
+  .result-badge { display: inline-block; width: 80px; height: 80px; border-radius: 50%; font-size: 36px; line-height: 80px; margin-bottom: 1.25rem; }
+  .result-type { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.5rem; }
+  .result-title { font-family: 'DM Serif Display', serif; font-size: 28px; font-weight: 400; margin-bottom: 0.25rem; }
   .result-title-ms { font-size: 14px; color: var(--text-secondary); font-style: italic; margin-bottom: 1rem; }
   .result-desc { font-size: 14px; color: var(--text-primary); line-height: 1.75; max-width: 420px; margin: 0 auto 0.75rem; }
   .result-desc-ms { font-size: 13px; color: var(--text-secondary); font-style: italic; line-height: 1.75; max-width: 420px; margin: 0 auto 1.5rem; }
   .result-divider { border: none; border-top: 1px solid var(--border); margin: 1.5rem 0; }
   .result-actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
-  .btn-outline {
-    padding: 10px 22px; background: transparent;
-    border: 1px solid var(--border); border-radius: 8px;
-    font-size: 13px; font-weight: 500; cursor: pointer;
-    color: var(--text-primary); font-family: 'Poppins', sans-serif;
-    transition: background 0.15s;
-  }
-  .btn-outline:hover { background: var(--gray-bg); }
-  .btn-primary {
-    padding: 10px 22px; background: var(--purple-mid); border: none;
-    border-radius: 8px; font-size: 13px; font-weight: 500;
-    cursor: pointer; color: white; font-family: 'Poppins', sans-serif;
-    transition: background 0.15s;
-  }
+  .btn-primary { padding: 10px 22px; background: var(--purple-mid); border: none; border-radius: 8px; font-size: 13px; font-weight: 500; cursor: pointer; color: white; font-family: 'Inter', sans-serif; transition: background 0.15s; }
   .btn-primary:hover { background: var(--purple-dark); }
   .submit-status { font-size: 13px; color: var(--text-secondary); margin-top: 1rem; min-height: 20px; text-align: center; }
   .submit-status.success { color: var(--teal-mid); }
   .submit-status.error { color: var(--coral-mid); }
-
-  .type-visionary .result-badge { background: var(--purple-light); }
-  .type-visionary .result-type { color: var(--purple-mid); }
-  .type-visionary .result-title { color: var(--purple-dark); }
-  .type-executor .result-badge { background: var(--amber-light); }
-  .type-executor .result-type { color: var(--amber-mid); }
-  .type-executor .result-title { color: #633806; }
-  .type-harmonizer .result-badge { background: var(--teal-light); }
-  .type-harmonizer .result-type { color: var(--teal-mid); }
-  .type-harmonizer .result-title { color: #085041; }
-  .type-strategist .result-badge { background: var(--coral-light); }
-  .type-strategist .result-type { color: var(--coral-mid); }
-  .type-strategist .result-title { color: #711B13; }
-
-  @media (max-width: 480px) {
-    .card { padding: 1.5rem; }
-    .question-text { font-size: 17px; }
-  }
+  @media (max-width: 480px) { .card { padding: 1.5rem; } .question-text { font-size: 17px; } }
 </style>
 </head>
 <body>
@@ -189,9 +74,34 @@
   <div class="eyebrow">MTA Program Survey · Kuiz Program MTA</div>
   <h1>What kind of colleague are you?</h1>
   <p class="h1-sub">Apa jenis rakan sekerja anda?</p>
-  <p class="subtitle">9 quick questions — find your workplace personality and help us learn more about you.<br><em style="font-size:13px">9 soalan ringkas — temui personaliti tempat kerja anda dan bantu kami kenali anda lebih baik.</em></p>
+  <p class="subtitle">Survey Penjejak Pekerjaan untuk pelaporan data kepada Yayasan Hasanah.<br>
+  <em style="font-size:13px">9 soalan ringkas — temui personaliti tempat kerja anda dan bantu kami kenali anda lebih baik.</em></p>
 </div>
 
+<!-- Name + Phone card -->
+<div class="card" id="name-card" style="max-width:580px; width:100%; margin-bottom: 1rem;">
+  <div class="eyebrow" style="font-size:11px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:#7F77DD; margin-bottom:0.75rem;">Sebelum kita mulakan / Before we begin</div>
+  <p class="question-text" style="font-family:'DM Serif Display',serif; font-size:19px; margin-bottom:0.25rem;">Let's get to know you first!</p>
+  <p class="question-text-ms" style="font-size:13px; color:#6b6b6b; font-style:italic; margin-bottom:1.5rem;">Mari kenali anda dahulu!</p>
+
+  <label style="font-size:13px; font-weight:600; color:#1a1a1a; display:block; margin-bottom:6px;">Full Name <span style="color:#D85A30;">*</span> <span style="color:#6b6b6b; font-weight:400; font-style:italic;">/ Nama Penuh</span></label>
+  <input type="text" id="name-input" placeholder="e.g. Ahmad Razif"
+    style="width:100%; padding:12px 16px; border:1px solid #e4e4e0; border-radius:10px; font-size:14px; font-family:'Inter',sans-serif; color:#1a1a1a; outline:none; transition: border-color 0.15s; margin-bottom:1.25rem;"
+    oninput="checkIntro()" onfocus="this.style.borderColor='#7F77DD'" onblur="this.style.borderColor='#e4e4e0'" />
+
+  <label style="font-size:13px; font-weight:600; color:#1a1a1a; display:block; margin-bottom:6px;">Phone Number <span style="color:#D85A30;">*</span> <span style="color:#6b6b6b; font-weight:400; font-style:italic;">/ Nombor Telefon</span></label>
+  <input type="tel" id="phone-input" placeholder="e.g. 0123456789"
+    style="width:100%; padding:12px 16px; border:1px solid #e4e4e0; border-radius:10px; font-size:14px; font-family:'Inter',sans-serif; color:#1a1a1a; outline:none; transition: border-color 0.15s;"
+    oninput="checkIntro()" onfocus="this.style.borderColor='#7F77DD'" onblur="this.style.borderColor='#e4e4e0'" />
+  <p id="duplicate-warning" style="display:none; color:#D85A30; font-size:13px; margin-top:10px;">
+    ⚠️ This phone number has already been submitted. / Nombor telefon ini telah dihantar sebelum ini.
+  </p>
+  <div style="margin-top:1.5rem; display:flex; justify-content:flex-end;">
+    <button class="next-btn" id="name-next-btn" style="display:none;" onclick="startQuiz()">Mulakan / Start →</button>
+  </div>
+</div>
+
+<!-- Quiz card -->
 <div class="card" id="quiz-card" style="display:none;">
   <div class="progress-wrap">
     <div class="progress-meta">
@@ -200,7 +110,6 @@
     </div>
     <div class="progress-track"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
   </div>
-
   <div id="quiz-area">
     <div id="q-tag" class="question-type-tag tag-fun"></div>
     <p class="question-text" id="q-text-en"></p>
@@ -210,7 +119,6 @@
       <button class="next-btn" id="next-btn" onclick="nextQ()">Seterusnya / Next →</button>
     </div>
   </div>
-
   <div class="result-wrap" id="result-wrap">
     <div class="result-badge" id="r-emoji"></div>
     <div class="result-type" id="r-type">Personaliti anda / Your personality type</div>
@@ -226,62 +134,158 @@
   </div>
 </div>
 
-<div class="card" id="name-card" style="max-width:580px; width:100%; margin-bottom: 1rem;">
-  <div class="eyebrow" style="font-size:11px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:#7F77DD; margin-bottom:0.75rem;">Sebelum kita mulakan / Before we begin</div>
-  <p class="question-text" style="font-family:'DM Serif Display',serif; font-size:19px; margin-bottom:0.25rem;">Let's get to know you first!</p>
-  <p class="question-text-ms" style="font-size:13px; color:#6b6b6b; font-style:italic; margin-bottom:1.5rem;">Mari kenali anda dahulu!</p>
-
-  <label style="font-size:13px; font-weight:600; color:#1a1a1a; display:block; margin-bottom:6px;">Full Name <span style="color:#D85A30;">*</span> <span style="color:#6b6b6b; font-weight:400; font-style:italic;">/ Nama Penuh</span></label>
-  <input
-    type="text"
-    id="name-input"
-    placeholder="e.g. Ahmad Razif"
-    style="width:100%; padding:12px 16px; border:1px solid #e4e4e0; border-radius:10px;
-           font-size:14px; font-family:'Inter',sans-serif; color:#1a1a1a;
-           outline:none; transition: border-color 0.15s; margin-bottom:1.25rem;"
-    oninput="checkIntro()"
-    onfocus="this.style.borderColor='#7F77DD'"
-    onblur="this.style.borderColor='#e4e4e0'"
-  />
-
-  <label style="font-size:13px; font-weight:600; color:#1a1a1a; display:block; margin-bottom:6px;">Phone Number <span style="color:#D85A30;">*</span> <span style="color:#6b6b6b; font-weight:400; font-style:italic;">/ Nombor Telefon</span></label>
-  <input
-    type="tel"
-    id="phone-input"
-    placeholder="e.g. 0123456789"
-    style="width:100%; padding:12px 16px; border:1px solid #e4e4e0; border-radius:10px;
-           font-size:14px; font-family:'Inter',sans-serif; color:#1a1a1a;
-           outline:none; transition: border-color 0.15s;"
-    oninput="checkIntro()"
-    onfocus="this.style.borderColor='#7F77DD'"
-    onblur="this.style.borderColor='#e4e4e0'"
-  />
-  <p id="duplicate-warning" style="display:none; color:#D85A30; font-size:13px; margin-top:10px;">
-    ⚠️ This phone number has already been submitted. / Nombor telefon ini telah dihantar sebelum ini.
-  </p>
-
-  <div style="margin-top:1.5rem; display:flex; justify-content:flex-end;">
-    <button class="next-btn" id="name-next-btn" style="display:none;" onclick="startQuiz()">Mulakan / Start →</button>
-  </div>
-</div>
-  <div style="margin-top:1.5rem; display:flex; justify-content:flex-end;">
-    <button class="next-btn" id="name-next-btn" style="display:none;" onclick="startQuiz()">Mulakan / Start →</button>
-  </div>
-</div>
- 
 <script>
-// Track all submitted phone numbers (loaded from Sheets on page load)
+const SHEET_URL = "https://script.google.com/macros/s/AKfycbx94L5PPe2NAME2iBa_PC1X-_sYcrE4Fi-6DHF8gpD8r_rPCPZfYDRjntKzGe8z9Xme/exec";
+
+// ─── 12 CHARACTER RESULTS ───────────────────────────────────────────────────
+// Each character is triggered by a unique combination of top-2 trait scores.
+// Traits: visionary (V), executor (E), harmonizer (H), strategist (S)
+// Combo key = top trait + second trait e.g. "V+E"
+
+const results = {
+  // Single dominant trait (all 5 answers same trait — rare but handled)
+  "V":  { emoji: "🚀", en: "The Trailblazer", ms: "Si Perintis", color: "#7F77DD", bg: "#EEEDFE",
+    descEn: "You live on the cutting edge. New ideas, bold moves, uncharted territory — that's where you thrive. You don't just think outside the box; you forget the box exists.",
+    descMs: "Anda hidup di hadapan arus. Idea baru, langkah berani, kawasan belum diterokai — di situlah anda bersinar. Anda bukan sekadar berfikir di luar kotak, anda lupa kotak itu wujud." },
+  "E":  { emoji: "⚡", en: "The Finisher", ms: "Si Penyudah", color: "#BA7517", bg: "#FAEEDA",
+    descEn: "Deadlines don't scare you — they motivate you. You're the person everyone relies on to actually get things across the finish line. No fuss, no drama, just results.",
+    descMs: "Tarikh akhir tidak menakutkan anda — ia memotivasikan anda. Anda adalah orang yang semua orang harapkan untuk menyiapkan sesuatu. Tiada drama, hanya hasil." },
+  "H":  { emoji: "🌱", en: "The Nurturer", ms: "Si Pemelihara", color: "#1D9E75", bg: "#E1F5EE",
+    descEn: "People are your superpower. You create environments where everyone feels seen, safe, and supported. Teams don't just work better around you — they grow.",
+    descMs: "Manusia adalah kuasa super anda. Anda mencipta persekitaran di mana semua orang rasa dilihat, selamat, dan disokong. Pasukan bukan sahaja bekerja lebih baik bersama anda — mereka berkembang." },
+  "S":  { emoji: "🧩", en: "The Mastermind", ms: "Si Otak Jentera", color: "#D85A30", bg: "#FAECE7",
+    descEn: "You see the chess board, not just the pieces. Patterns, risks, long-term plays — your brain never stops connecting dots. When chaos hits, everyone looks to you.",
+    descMs: "Anda nampak papan catur, bukan sekadar buah catur. Corak, risiko, strategi jangka panjang — otak anda tidak pernah berhenti menghubungkan titik-titik. Bila kekacauan berlaku, semua orang mencari anda." },
+
+  // Combo: Visionary + X
+  "V+E": { emoji: "🔥", en: "The Hustler", ms: "Si Usahawan Jalanan", color: "#C2437A", bg: "#FDEEF5",
+    descEn: "Big dreams AND the drive to make them real? That's rare. You're the one pitching bold ideas on Monday and shipping them by Friday. Equal parts dreamer and doer.",
+    descMs: "Impian besar DAN semangat untuk merealisasikannya? Itu jarang ada. Anda mencadangkan idea berani pada Isnin dan menyiapkannya menjelang Jumaat. Separuh pemimpi, separuh pelaksana." },
+  "V+H": { emoji: "✨", en: "The Inspirer", ms: "Si Penyuluh", color: "#7F77DD", bg: "#EEEDFE",
+    descEn: "You don't just have great ideas — you make people believe in them. Your warmth and vision create a gravitational pull. People follow you not because they have to, but because they want to.",
+    descMs: "Anda bukan sekadar ada idea hebat — anda buat orang percaya padanya. Kehangatan dan visi anda mencipta daya tarikan. Orang mengikuti anda bukan kerana terpaksa, tetapi kerana mereka mahu." },
+  "V+S": { emoji: "🌐", en: "The Architect", ms: "Si Perancang Agung", color: "#2C6FD1", bg: "#E8F1FD",
+    descEn: "You imagine the future AND blueprint how to build it. Where others see a wild idea, you see a structured path. You're the person who makes 'impossible' feel inevitable.",
+    descMs: "Anda membayangkan masa depan DAN merancang cara membinanya. Di mana orang lain nampak idea gila, anda nampak jalan yang tersusun. Anda adalah orang yang menjadikan 'mustahil' terasa boleh berlaku." },
+
+  // Combo: Executor + X
+  "E+V": { emoji: "💡", en: "The Launcher", ms: "Si Pelancaran", color: "#BA7517", bg: "#FAEEDA",
+    descEn: "You have the rare ability to take a spark of an idea and turn it into something real, fast. You're not waiting for perfect conditions — you build the plane while flying it.",
+    descMs: "Anda mempunyai kebolehan langka untuk mengambil percikan idea dan menjadikannya kenyataan, dengan pantas. Anda tidak menunggu keadaan yang sempurna — anda bina kapal sambil terbang." },
+  "E+H": { emoji: "🤝", en: "The Team Captain", ms: "Si Kapten Pasukan", color: "#1D9E75", bg: "#E1F5EE",
+    descEn: "You get things done AND make sure no one gets left behind. Results matter to you, but so do people. You're the leader who celebrates the team's wins louder than your own.",
+    descMs: "Anda menyiapkan kerja DAN pastikan tiada siapa yang tertinggal. Hasil penting bagi anda, begitu juga manusia. Anda adalah pemimpin yang meraikan kejayaan pasukan lebih kuat daripada kejayaan sendiri." },
+  "E+S": { emoji: "📊", en: "The Operator", ms: "Si Pengurus Handal", color: "#D85A30", bg: "#FAECE7",
+    descEn: "Systems, processes, efficiency — you speak this language fluently. You turn messy workflows into clean machines. If something can be optimised, you've already figured out how.",
+    descMs: "Sistem, proses, kecekapan — anda fasih dengan bahasa ini. Anda tukar aliran kerja yang tunggang-langgang menjadi mesin yang kemas. Jika sesuatu boleh dioptimumkan, anda sudah tahu caranya." },
+
+  // Combo: Harmonizer + X
+  "H+V": { emoji: "🎨", en: "The Culture Maker", ms: "Si Pembina Budaya", color: "#C2437A", bg: "#FDEEF5",
+    descEn: "You believe great teams are built on great culture — and you actively create it. Creative, people-first, and full of energy, you make work feel like a place people actually want to be.",
+    descMs: "Anda percaya pasukan hebat dibina atas budaya yang hebat — dan anda aktif menciptanya. Kreatif, mengutamakan manusia, dan penuh tenaga, anda menjadikan tempat kerja sebagai tempat yang orang benar-benar mahu berada." },
+  "H+S": { emoji: "🧭", en: "The Wise Owl", ms: "Si Burung Hantu Bijak", color: "#2C6FD1", bg: "#E8F1FD",
+    descEn: "You combine emotional intelligence with sharp thinking — a rare combo. You read the room, understand the politics, and always know the right thing to say at the right time.",
+    descMs: "Anda menggabungkan kecerdasan emosi dengan pemikiran tajam — kombinasi yang langka. Anda memahami suasana, mengerti politik pejabat, dan sentiasa tahu apa yang perlu dikatakan pada masa yang tepat." },
+
+  // Combo: Strategist + X  
+  "S+H": { emoji: "🏛️", en: "The Diplomat", ms: "Si Diplomat", color: "#7F77DD", bg: "#EEEDFE",
+    descEn: "Strategy with a human touch. You think several steps ahead but never lose sight of the people involved. You navigate complex situations with both logic and empathy — and that's incredibly powerful.",
+    descMs: "Strategi dengan sentuhan manusiawi. Anda berfikir beberapa langkah ke hadapan tetapi tidak pernah lupa tentang manusia yang terlibat. Anda tangani situasi kompleks dengan logik dan empati — dan itu sangat berkuasa." }
+};
+
+// ─── QUESTIONS (alternating: fun, survey, fun, survey...) ────────────────────
+const questions = [
+  // Q1 — Fun
+  { kind:"fun", en:"A surprise all-hands meeting is called with no agenda. Your first thought is…", ms:"Mesyuarat mengejut diadakan tanpa agenda. Fikiran pertama anda ialah…",
+    options:[
+      { en:"Finally, a chance to share my latest idea!", ms:"Akhirnya, peluang untuk kongsikan idea terbaru saya!", trait:"V" },
+      { en:"I hope we get clear action items at the end.", ms:"Harap ada perkara tindakan yang jelas di penghujungnya.", trait:"E" },
+      { en:"I'll make sure everyone feels heard.", ms:"Saya akan pastikan semua orang rasa didengar.", trait:"H" },
+      { en:"I'm already mentally preparing three possible scenarios.", ms:"Saya sudah sediakan tiga senario yang mungkin berlaku.", trait:"S" }
+    ]},
+  // Q2 — Survey
+  { kind:"survey", key:"status", en:"What's your current status right now?", ms:"Apakah status semasa anda sekarang?",
+    options:[
+      { en:"Working full-time", ms:"Bekerja sepenuh masa" },
+      { en:"Working part-time / freelance", ms:"Bekerja separuh masa / bebas" },
+      { en:"Still studying / furthering my education", ms:"Masih belajar / melanjutkan pelajaran" },
+      { en:"Currently looking for opportunities", ms:"Sedang mencari peluang pekerjaan" }
+    ]},
+  // Q3 — Fun
+  { kind:"fun", en:"Your team's project is behind schedule. You instinctively…", ms:"Projek pasukan anda lewat. Secara naluri, anda…",
+    options:[
+      { en:"Propose a bold, unconventional fix to get back on track.", ms:"Cadangkan penyelesaian berani dan luar biasa.", trait:"V" },
+      { en:"Break the problem into tasks and start assigning them.", ms:"Pecahkan masalah kepada tugas dan mula agihkannya.", trait:"E" },
+      { en:"Check in with each person to see who needs support.", ms:"Semak dengan setiap ahli untuk tahu siapa perlukan sokongan.", trait:"H" },
+      { en:"Map out the risks and build a recovery plan first.", ms:"Kenal pasti risiko dan bina pelan pemulihan dahulu.", trait:"S" }
+    ]},
+  // Q4 — Survey
+  { kind:"survey", key:"industry", en:"If you're currently working, what industry are you in?", ms:"Jika anda sedang bekerja, apakah industri anda?", type:"dropdown",
+    options:[
+      { en:"Finance", ms:"Kewangan" }, { en:"Tech", ms:"Teknologi" }, { en:"Retail", ms:"Runcit" },
+      { en:"Healthcare", ms:"Penjagaan Kesihatan" }, { en:"Education", ms:"Pendidikan" },
+      { en:"F&B", ms:"Makanan & Minuman" }, { en:"Media", ms:"Media" },
+      { en:"Others", ms:"Lain-lain" }, { en:"Not applicable", ms:"Tidak berkenaan" }
+    ]},
+  // Q5 — Fun
+  { kind:"fun", en:"Your ideal desk setup is…", ms:"Susunan meja ideal anda ialah…",
+    options:[
+      { en:"Covered in colourful sticky notes and half-finished sketches.", ms:"Penuh nota warna-warni dan lakaran separuh siap.", trait:"V" },
+      { en:"Clean, with a to-do list front and centre.", ms:"Kemas, dengan senarai tugasan di hadapan.", trait:"E" },
+      { en:"Has a plant, some photos, and is near the team.", ms:"Ada pokok, beberapa gambar, dan berdekatan pasukan.", trait:"H" },
+      { en:"Has a whiteboard nearby for diagrams and frameworks.", ms:"Ada papan putih berhampiran untuk gambar rajah.", trait:"S" }
+    ]},
+  // Q6 — Survey
+  { kind:"survey", key:"income", en:"What's your current monthly income range?", ms:"Apakah julat pendapatan bulanan semasa anda?",
+    options:[
+      { en:"Below RM1,500", ms:"Bawah RM1,500" },
+      { en:"RM1,500 – RM2,499", ms:"RM1,500 – RM2,499" },
+      { en:"RM2,500 – RM3,499", ms:"RM2,500 – RM3,499" },
+      { en:"RM3,500 – RM4,999", ms:"RM3,500 – RM4,999" },
+      { en:"RM5,000 and above", ms:"RM5,000 ke atas" },
+      { en:"Not applicable (studying / not working yet)", ms:"Tidak berkenaan (masih belajar / belum bekerja)" }
+    ]},
+  // Q7 — Fun
+  { kind:"fun", en:"When giving feedback, you tend to…", ms:"Ketika memberi maklum balas, anda biasanya…",
+    options:[
+      { en:"Inspire them with what's possible if they level up.", ms:"Memotivasikan mereka dengan potensi yang ada.", trait:"V" },
+      { en:"Give specific, direct points with clear next steps.", ms:"Memberi poin khusus dan langsung dengan langkah seterusnya.", trait:"E" },
+      { en:"Sandwich it kindly and focus on encouragement.", ms:"Menyampaikannya dengan baik dan memberi tumpuan kepada dorongan.", trait:"H" },
+      { en:"Present it as data — here's the pattern I'm seeing.", ms:"Menyampaikannya sebagai data — ini corak yang saya perhatikan.", trait:"S" }
+    ]},
+  // Q8 — Survey
+  { kind:"survey", key:"mta_helped", en:"Has the MTA program helped you in your career journey so far?", ms:"Adakah program MTA membantu perjalanan kerjaya anda setakat ini?",
+    options:[
+      { en:"Definitely yes", ms:"Ya, sudah tentu" },
+      { en:"Somewhat yes", ms:"Agak ya" },
+      { en:"Not sure yet", ms:"Belum pasti lagi" },
+      { en:"Not really", ms:"Tidak begitu" }
+    ]},
+  // Q9 — Fun
+  { kind:"fun", en:"The most satisfying part of finishing a project is…", ms:"Bahagian paling memuaskan selepas menyiapkan projek ialah…",
+    options:[
+      { en:"Seeing a wild idea become reality.", ms:"Melihat idea gila menjadi kenyataan.", trait:"V" },
+      { en:"Ticking the final item off the list.", ms:"Menanda perkara terakhir dalam senarai.", trait:"E" },
+      { en:"Celebrating together as a team.", ms:"Meraikan bersama-sama sebagai satu pasukan.", trait:"H" },
+      { en:"Running the retrospective to learn for next time.", ms:"Menjalankan ulasan untuk belajar bagi projek akan datang.", trait:"S" }
+    ]}
+];
+
+// ─── STATE ───────────────────────────────────────────────────────────────────
+let current = 0;
+let scores = { V:0, E:0, H:0, S:0 };
+let answers = {};
+let selectedValue = null;
+let selectedTrait = null;
 let submittedPhones = [];
 
-// Fetch already-submitted phone numbers from your sheet on page load
+// ─── DUPLICATE CHECK ─────────────────────────────────────────────────────────
 async function loadSubmittedPhones() {
   try {
     const res = await fetch(SHEET_URL + "?action=getPhones");
     const data = await res.json();
     submittedPhones = data.phones || [];
-  } catch (e) {
-    submittedPhones = []; // fail silently, allow quiz to proceed
-  }
+  } catch(e) { submittedPhones = []; }
 }
 
 function checkIntro() {
@@ -289,7 +293,6 @@ function checkIntro() {
   const phone = document.getElementById('phone-input').value.trim();
   const warning = document.getElementById('duplicate-warning');
   const isDuplicate = phone.length > 0 && submittedPhones.includes(phone);
-
   warning.style.display = isDuplicate ? 'block' : 'none';
   document.getElementById('name-next-btn').style.display =
     (name.length > 0 && phone.length > 6 && !isDuplicate) ? 'inline-block' : 'none';
@@ -298,179 +301,20 @@ function checkIntro() {
 function startQuiz() {
   const name = document.getElementById('name-input').value.trim();
   const phone = document.getElementById('phone-input').value.trim();
-  if (!name || !phone) return;
-  if (submittedPhones.includes(phone)) return;
+  if (!name || !phone || submittedPhones.includes(phone)) return;
   answers['name'] = name;
   answers['phone'] = phone;
   document.getElementById('name-card').style.display = 'none';
   document.getElementById('quiz-card').style.display = 'block';
+  render();
 }
 
-// Call this when page loads
-loadSubmittedPhones();
- 
-const SHEET_URL = "https://script.google.com/macros/s/AKfycbx94L5PPe2NAME2iBa_PC1X-_sYcrE4Fi-6DHF8gpD8r_rPCPZfYDRjntKzGe8z9Xme/exec";
-
-const questions = [
-  // Q1 — Fun
-  {
-    kind: "fun",
-    en: "A surprise all-hands meeting is called with no agenda. Your first thought is…",
-    ms: "Mesyuarat mengejut diadakan tanpa agenda. Fikiran pertama anda ialah…",
-    options: [
-      { en: "Finally, a chance to share my latest idea!", ms: "Akhirnya, peluang untuk kongsikan idea terbaru saya!", type: "visionary" },
-      { en: "I hope we get clear action items at the end.", ms: "Harap ada perkara tindakan yang jelas di penghujungnya.", type: "executor" },
-      { en: "I'll make sure everyone feels heard.", ms: "Saya akan pastikan semua orang rasa didengar.", type: "harmonizer" },
-      { en: "I'm already mentally preparing three possible scenarios.", ms: "Saya sudah sediakan tiga senario yang mungkin berlaku.", type: "strategist" }
-    ]
-  },
-  // Q2 — Survey
-  {
-    kind: "survey",
-    key: "status",
-    en: "What's your current status right now?",
-    ms: "Apakah status semasa anda sekarang?",
-    options: [
-      { en: "Working full-time", ms: "Bekerja sepenuh masa" },
-      { en: "Working part-time / freelance", ms: "Bekerja separuh masa / bebas" },
-      { en: "Still studying / furthering my education", ms: "Masih belajar / melanjutkan pelajaran" },
-      { en: "Currently looking for opportunities", ms: "Sedang mencari peluang pekerjaan" }
-    ]
-  },
-  // Q3 — Fun
-  {
-    kind: "fun",
-    en: "Your team's project is behind schedule. You instinctively…",
-    ms: "Projek pasukan anda lewat. Secara naluri, anda…",
-    options: [
-      { en: "Propose a bold, unconventional fix to get back on track.", ms: "Cadangkan penyelesaian berani dan luar biasa untuk kembali ke landasan.", type: "visionary" },
-      { en: "Break the problem into tasks and start assigning them.", ms: "Pecahkan masalah kepada tugas dan mula agihkannya.", type: "executor" },
-      { en: "Check in with each person to see who needs support.", ms: "Semak dengan setiap ahli pasukan untuk tahu siapa yang perlukan sokongan.", type: "harmonizer" },
-      { en: "Map out the risks and build a recovery plan first.", ms: "Kenal pasti risiko dan bina pelan pemulihan dahulu.", type: "strategist" }
-    ]
-  },
-  // Q4 — Survey
-  {
-    kind: "survey",
-    key: "industry",
-    en: "If you're currently working, what industry are you in?",
-    ms: "Jika anda sedang bekerja, apakah industri anda?",
-    type: "dropdown",
-    options: [
-      { en: "Finance", ms: "Kewangan" },
-      { en: "Tech", ms: "Teknologi" },
-      { en: "Retail", ms: "Runcit" },
-      { en: "Healthcare", ms: "Penjagaan Kesihatan" },
-      { en: "Education", ms: "Pendidikan" },
-      { en: "F&B", ms: "Makanan & Minuman" },
-      { en: "Media", ms: "Media" },
-      { en: "Others", ms: "Lain-lain" },
-      { en: "Not applicable", ms: "Tidak berkenaan" }
-    ]
-  },
-  // Q5 — Fun
-  {
-    kind: "fun",
-    en: "Your ideal desk setup is…",
-    ms: "Susunan meja ideal anda ialah…",
-    options: [
-      { en: "Covered in colourful sticky notes and half-finished sketches.", ms: "Penuh nota warna-warni dan lakaran separuh siap.", type: "visionary" },
-      { en: "Clean, with a to-do list front and centre.", ms: "Kemas, dengan senarai tugasan di hadapan.", type: "executor" },
-      { en: "Has a plant, some photos, and is near the team.", ms: "Ada pokok, beberapa gambar, dan berdekatan pasukan.", type: "harmonizer" },
-      { en: "Has a whiteboard nearby for diagrams and frameworks.", ms: "Ada papan putih berhampiran untuk gambar rajah dan rangka kerja.", type: "strategist" }
-    ]
-  },
-  // Q6 — Survey
-  {
-    kind: "survey",
-    key: "income",
-    en: "What's your current monthly income range?",
-    ms: "Apakah julat pendapatan bulanan semasa anda?",
-    options: [
-      { en: "Below RM1,500", ms: "Bawah RM1,500" },
-      { en: "RM1,500 – RM2,499", ms: "RM1,500 – RM2,499" },
-      { en: "RM2,500 – RM3,499", ms: "RM2,500 – RM3,499" },
-      { en: "RM3,500 – RM4,999", ms: "RM3,500 – RM4,999" },
-      { en: "RM5,000 and above", ms: "RM5,000 ke atas" },
-      { en: "Not applicable (studying / not working yet)", ms: "Tidak berkenaan (masih belajar / belum bekerja)" }
-    ]
-  },
-  // Q7 — Fun
-  {
-    kind: "fun",
-    en: "When giving feedback, you tend to…",
-    ms: "Ketika memberi maklum balas, anda biasanya…",
-    options: [
-      { en: "Inspire them with what's possible if they level up.", ms: "Memotivasikan mereka dengan potensi yang ada jika mereka berkembang.", type: "visionary" },
-      { en: "Give specific, direct points with clear next steps.", ms: "Memberi poin khusus dan langsung dengan langkah seterusnya yang jelas.", type: "executor" },
-      { en: "Sandwich it kindly and focus on encouragement.", ms: "Menyampaikannya dengan baik dan memberi tumpuan kepada dorongan.", type: "harmonizer" },
-      { en: "Present it as data — here's the pattern I'm seeing.", ms: "Menyampaikannya sebagai data — ini corak yang saya perhatikan.", type: "strategist" }
-    ]
-  },
-  // Q8 — Survey
-  {
-    kind: "survey",
-    key: "mta_helped",
-    en: "Has the MTA program helped you in your career journey so far?",
-    ms: "Adakah program MTA membantu perjalanan kerjaya anda setakat ini?",
-    options: [
-      { en: "Definitely yes", ms: "Ya, sudah tentu" },
-      { en: "Somewhat yes", ms: "Agak ya" },
-      { en: "Not sure yet", ms: "Belum pasti lagi" },
-      { en: "Not really", ms: "Tidak begitu" }
-    ]
-  },
-  // Q9 — Fun
-  {
-    kind: "fun",
-    en: "The most satisfying part of finishing a project is…",
-    ms: "Bahagian paling memuaskan selepas menyiapkan projek ialah…",
-    options: [
-      { en: "Seeing a wild idea become reality.", ms: "Melihat idea gila menjadi kenyataan.", type: "visionary" },
-      { en: "Ticking the final item off the list.", ms: "Menanda perkara terakhir dalam senarai.", type: "executor" },
-      { en: "Celebrating together as a team.", ms: "Meraikan bersama-sama sebagai satu pasukan.", type: "harmonizer" },
-      { en: "Running the retrospective to learn for next time.", ms: "Menjalankan ulasan untuk belajar bagi projek akan datang.", type: "strategist" }
-    ]
-  }
-];
-
-const results = {
-  visionary: {
-    emoji: "🚀",
-    en: "The Visionary", ms: "Si Visioner",
-    descEn: "You see possibilities others miss and love pushing boundaries. Your energy is contagious — just remember to loop in the planners so your brilliant ideas actually land.",
-    descMs: "Anda nampak peluang yang orang lain terlepas pandang dan suka menolak batasan. Semangat anda menular — cuma ingat untuk libatkan perancang agar idea brillian anda benar-benar terlaksana."
-  },
-  executor: {
-    emoji: "⚡",
-    en: "The Executor", ms: "Si Pelaksana",
-    descEn: "You get things done, full stop. You're the engine of any team, turning vague goals into ticked checkboxes. Your superpower: making the impossible feel manageable.",
-    descMs: "Anda menyiapkan kerja, titik. Anda adalah enjin pasukan, menukar matlamat kabur menjadi kotak yang ditanda. Kuasa super anda: menjadikan yang mustahil terasa boleh dilakukan."
-  },
-  harmonizer: {
-    emoji: "🌱",
-    en: "The Harmonizer", ms: "Si Pengharmoni",
-    descEn: "You're the glue of the team. You notice when morale dips before anyone else does, and your empathy makes the whole team feel safe to do their best work.",
-    descMs: "Anda adalah perekat pasukan. Anda perasan bila semangat pasukan menurun sebelum orang lain sedar, dan empati anda menjadikan seluruh pasukan rasa selamat untuk melakukan kerja terbaik mereka."
-  },
-  strategist: {
-    emoji: "🧩",
-    en: "The Strategist", ms: "Si Ahli Strategi",
-    descEn: "You're three steps ahead — always. You see patterns, anticipate risks, and love a good framework. Teams rely on you to bring calm, structured thinking to chaos.",
-    descMs: "Anda sentiasa tiga langkah ke hadapan. Anda nampak corak, jangkakan risiko, dan sukakan rangka kerja yang baik. Pasukan bergantung kepada anda untuk membawa pemikiran tenang dan berstruktur ketika keadaan huru-hara."
-  }
-};
-
-let current = 0;
-let scores = { visionary: 0, executor: 0, harmonizer: 0, strategist: 0 };
-let answers = {};
-let selectedValue = null;
-
+// ─── QUIZ RENDER ─────────────────────────────────────────────────────────────
 function render() {
   const q = questions[current];
   const total = questions.length;
   const pct = Math.round((current / total) * 100);
-  document.getElementById('q-counter').textContent = `Soalan / Question ${current + 1} of ${total}`;
+  document.getElementById('q-counter').textContent = `Soalan / Question ${current+1} of ${total}`;
   document.getElementById('q-pct').textContent = pct + '%';
   document.getElementById('progress-fill').style.width = pct + '%';
 
@@ -485,8 +329,7 @@ function render() {
 
   document.getElementById('q-text-en').textContent = q.en;
   document.getElementById('q-text-ms').textContent = q.ms;
-
-  selectedValue = null;
+  selectedValue = null; selectedTrait = null;
   document.getElementById('next-btn').style.display = 'none';
 
   const opts = document.getElementById('options');
@@ -497,13 +340,9 @@ function render() {
     wrap.className = 'dropdown-wrap';
     const sel = document.createElement('select');
     sel.className = 'styled-select';
-    sel.id = 'dropdown-sel';
-    const placeholder = document.createElement('option');
-    placeholder.value = '';
-    placeholder.textContent = '— Pilih / Select —';
-    placeholder.disabled = true;
-    placeholder.selected = true;
-    sel.appendChild(placeholder);
+    const ph = document.createElement('option');
+    ph.value=''; ph.textContent='— Pilih / Select —'; ph.disabled=true; ph.selected=true;
+    sel.appendChild(ph);
     q.options.forEach(o => {
       const opt = document.createElement('option');
       opt.value = o.en;
@@ -511,11 +350,7 @@ function render() {
       sel.appendChild(opt);
     });
     sel.onchange = () => {
-      if (sel.value) {
-        selectedValue = sel.value;
-        sel.classList.add('selected-val');
-        document.getElementById('next-btn').style.display = 'inline-block';
-      }
+      if (sel.value) { selectedValue = sel.value; sel.classList.add('selected-val'); document.getElementById('next-btn').style.display = 'inline-block'; }
     };
     wrap.appendChild(sel);
     opts.appendChild(wrap);
@@ -523,12 +358,7 @@ function render() {
     q.options.forEach(o => {
       const btn = document.createElement('button');
       btn.className = 'opt';
-      btn.innerHTML = `
-        <span class="opt-dot"></span>
-        <span>
-          <div class="opt-label">${o.en}</div>
-          <div class="opt-label-ms">${o.ms}</div>
-        </span>`;
+      btn.innerHTML = `<span class="opt-dot"></span><span><div class="opt-label">${o.en}</div><div class="opt-label-ms">${o.ms}</div></span>`;
       btn.onclick = () => selectOpt(btn, o);
       opts.appendChild(btn);
     });
@@ -539,24 +369,35 @@ function selectOpt(btn, o) {
   document.querySelectorAll('.opt').forEach(b => b.classList.remove('selected'));
   btn.classList.add('selected');
   selectedValue = o.en;
+  selectedTrait = o.trait || null;
   document.getElementById('next-btn').style.display = 'inline-block';
-  if (o.type) {
-    scores[o.type]++;
-  }
 }
 
 function nextQ() {
   if (!selectedValue) return;
   const q = questions[current];
-  if (q.kind === 'survey') {
-    answers[q.key] = selectedValue;
-  }
+  if (q.kind === 'survey') { answers[q.key] = selectedValue; }
+  if (q.kind === 'fun' && selectedTrait) { scores[selectedTrait]++; }
   current++;
-  if (current < questions.length) {
-    render();
-  } else {
-    showResult();
-  }
+  if (current < questions.length) { render(); } else { showResult(); }
+}
+
+// ─── RESULT LOGIC ─────────────────────────────────────────────────────────────
+function getResult() {
+  // Sort traits by score descending
+  const sorted = Object.entries(scores).sort((a,b) => b[1]-a[1]);
+  const top = sorted[0][0];
+  const second = sorted[1][0];
+  const topScore = sorted[0][1];
+  const secondScore = sorted[1][1];
+
+  // If one trait is dominant (2+ ahead), use single-trait result
+  if (topScore - secondScore >= 2) return results[top];
+
+  // Otherwise use combo key (top+second)
+  const comboKey = top + '+' + second;
+  const reverseKey = second + '+' + top;
+  return results[comboKey] || results[reverseKey] || results[top];
 }
 
 function showResult() {
@@ -564,24 +405,26 @@ function showResult() {
   document.getElementById('q-pct').textContent = '100%';
   document.getElementById('q-counter').textContent = 'Selesai / Complete!';
 
-  const winner = Object.entries(scores).sort((a, b) => b[1] - a[1])[0][0];
-  const r = results[winner];
+  const r = getResult();
 
   document.getElementById('quiz-area').style.display = 'none';
   const wrap = document.getElementById('result-wrap');
   wrap.style.display = 'block';
-  wrap.className = 'result-wrap type-' + winner;
 
   document.getElementById('r-emoji').textContent = r.emoji;
+  document.getElementById('r-emoji').style.background = r.bg;
+  document.getElementById('r-type').style.color = r.color;
+  document.getElementById('r-title').style.color = r.color;
   document.getElementById('r-title').textContent = r.en;
   document.getElementById('r-title-ms').textContent = r.ms;
   document.getElementById('r-desc').textContent = r.descEn;
   document.getElementById('r-desc-ms').textContent = r.descMs;
 
-  submitToSheets(winner, r.en);
+  submitToSheets(r.en);
 }
 
-function submitToSheets(winner, resultLabel) {
+// ─── SUBMIT TO SHEETS ─────────────────────────────────────────────────────────
+function submitToSheets(resultLabel) {
   const status = document.getElementById('submit-status');
   status.textContent = 'Menyimpan jawapan anda… / Saving your response…';
   status.className = 'submit-status';
@@ -597,9 +440,8 @@ function submitToSheets(winner, resultLabel) {
   };
 
   fetch(SHEET_URL, {
-    method: 'POST',
-    mode: 'no-cors',
-    headers: { 'Content-Type': 'application/json' },
+    method:'POST', mode:'no-cors',
+    headers:{'Content-Type':'application/json'},
     body: JSON.stringify(payload)
   })
   .then(() => {
@@ -616,26 +458,15 @@ function copyResult() {
   const title = document.getElementById('r-title').textContent;
   const titleMs = document.getElementById('r-title-ms').textContent;
   const desc = document.getElementById('r-desc').textContent;
-  const descMs = document.getElementById('r-desc-ms').textContent;
   const emoji = document.getElementById('r-emoji').textContent;
-  navigator.clipboard.writeText(`${emoji} I'm ${title} / Saya ${titleMs}!\n\n${desc}\n\n${descMs}`).then(() => {
+  navigator.clipboard.writeText(`${emoji} I'm ${title} / Saya ${titleMs}!\n\n${desc}`).then(() => {
     const btn = document.querySelector('.btn-primary');
     btn.textContent = '✓ Disalin! / Copied!';
     setTimeout(() => { btn.textContent = 'Salin keputusan / Copy result'; }, 2000);
   });
 }
 
-function restart() {
-  current = 0;
-  scores = { visionary: 0, executor: 0, harmonizer: 0, strategist: 0 };
-  answers = {};
-  selectedValue = null;
-  document.getElementById('result-wrap').style.display = 'none';
-  document.getElementById('quiz-area').style.display = 'block';
-  render();
-}
-
-render();
+loadSubmittedPhones();
 </script>
 </body>
 </html>
