@@ -126,6 +126,7 @@
     <p class="result-title-ms" id="r-title-ms"></p>
     <p class="result-desc" id="r-desc"></p>
     <p class="result-desc-ms" id="r-desc-ms"></p>
+   <div id="r-careers" style="margin-bottom:1.5rem;"></div>
     <hr class="result-divider">
     <div class="result-actions">
       <button class="btn-primary" onclick="copyResult()">Salin keputusan / Copy result</button>
@@ -143,54 +144,78 @@ const SHEET_URL = "https://script.google.com/macros/s/AKfycbx94L5PPe2NAME2iBa_PC
 // Combo key = top trait + second trait e.g. "V+E"
 
 const results = {
-  // Single dominant trait (all 5 answers same trait — rare but handled)
+  const results = {
   "V":  { emoji: "🚀", en: "The Trailblazer", ms: "Si Perintis", color: "#7F77DD", bg: "#EEEDFE",
     descEn: "You live on the cutting edge. New ideas, bold moves, uncharted territory — that's where you thrive. You don't just think outside the box; you forget the box exists.",
-    descMs: "Anda hidup di hadapan arus. Idea baru, langkah berani, kawasan belum diterokai — di situlah anda bersinar. Anda bukan sekadar berfikir di luar kotak, anda lupa kotak itu wujud." },
+    descMs: "Anda hidup di hadapan arus. Idea baru, langkah berani, kawasan belum diterokai — di situlah anda bersinar.",
+    careersEn: ["🏢 Entrepreneur — You don't follow paths, you create them. Building something from scratch is where you shine.", "📱 Product Manager — Turning wild ideas into real products? That's basically your job description.", "🎨 Creative Director — Leading creative vision across a brand or campaign feeds your need to innovate.", "🔬 R&D Specialist — Exploring what doesn't exist yet is your natural habitat."],
+    careersMs: ["🏢 Usahawan — Anda tidak ikut laluan, anda cipta laluan sendiri.", "📱 Pengurus Produk — Menukar idea besar kepada produk nyata adalah bidang anda.", "🎨 Pengarah Kreatif — Memimpin visi kreatif sesebuah jenama adalah tempat anda berkembang.", "🔬 Pakar R&D — Meneroka apa yang belum wujud adalah habitat semula jadi anda."] },
+
   "E":  { emoji: "⚡", en: "The Finisher", ms: "Si Penyudah", color: "#BA7517", bg: "#FAEEDA",
     descEn: "Deadlines don't scare you — they motivate you. You're the person everyone relies on to actually get things across the finish line. No fuss, no drama, just results.",
-    descMs: "Tarikh akhir tidak menakutkan anda — ia memotivasikan anda. Anda adalah orang yang semua orang harapkan untuk menyiapkan sesuatu. Tiada drama, hanya hasil." },
+    descMs: "Tarikh akhir tidak menakutkan anda — ia memotivasikan anda. Tiada drama, hanya hasil.",
+    careersEn: ["📋 Project Manager — You live for timelines, deliverables, and the satisfaction of ticking things off.", "⚙️ Operations Executive — Keeping the engine running smoothly is your superpower.", "🚚 Logistics Coordinator — Complex moving parts? You thrive on making them work in sync.", "🔍 Auditor — Detail-oriented and deadline-driven — a natural fit for audit and compliance work."],
+    careersMs: ["📋 Pengurus Projek — Anda hidup untuk garis masa dan kepuasan menanda tugasan siap.", "⚙️ Eksekutif Operasi — Memastikan mesin berjalan lancar adalah kekuatan anda.", "🚚 Koordinator Logistik — Bahagian-bahagian yang bergerak kompleks? Anda suka memastikan semuanya selaras.", "🔍 Juruaudit — Teliti dan patuh pada tarikh akhir — sesuai untuk kerja audit dan pematuhan."] },
+
   "H":  { emoji: "🌱", en: "The Nurturer", ms: "Si Pemelihara", color: "#1D9E75", bg: "#E1F5EE",
     descEn: "People are your superpower. You create environments where everyone feels seen, safe, and supported. Teams don't just work better around you — they grow.",
-    descMs: "Manusia adalah kuasa super anda. Anda mencipta persekitaran di mana semua orang rasa dilihat, selamat, dan disokong. Pasukan bukan sahaja bekerja lebih baik bersama anda — mereka berkembang." },
+    descMs: "Manusia adalah kuasa super anda. Anda mencipta persekitaran di mana semua orang rasa dilihat dan disokong.",
+    careersEn: ["👥 HR Manager — You understand people deeply, making you a natural at talent, culture, and wellbeing.", "💬 Counsellor / Social Worker — Your empathy creates safe spaces where people feel genuinely heard.", "📚 Teacher / Trainer — Watching others grow because of your guidance is the most rewarding thing for you.", "🌐 Community Manager — Building and nurturing communities, online or offline, feels like second nature."],
+    careersMs: ["👥 Pengurus HR — Anda memahami manusia dengan mendalam, menjadikan anda sesuai untuk bakat dan budaya.", "💬 Kaunselor / Pekerja Sosial — Empati anda mencipta ruang selamat di mana orang rasa didengar.", "📚 Guru / Jurulatih — Melihat orang lain berkembang kerana bimbingan anda adalah ganjaran terbesar.", "🌐 Pengurus Komuniti — Membina dan memelihara komuniti terasa seperti sifat semula jadi anda."] },
+
   "S":  { emoji: "🧩", en: "The Mastermind", ms: "Si Otak Jentera", color: "#D85A30", bg: "#FAECE7",
     descEn: "You see the chess board, not just the pieces. Patterns, risks, long-term plays — your brain never stops connecting dots. When chaos hits, everyone looks to you.",
-    descMs: "Anda nampak papan catur, bukan sekadar buah catur. Corak, risiko, strategi jangka panjang — otak anda tidak pernah berhenti menghubungkan titik-titik. Bila kekacauan berlaku, semua orang mencari anda." },
+    descMs: "Anda nampak papan catur, bukan sekadar buah catur. Bila kekacauan berlaku, semua orang mencari anda.",
+    careersEn: ["📊 Data Analyst — You love patterns and what they reveal. Data is just another puzzle to solve.", "🏛️ Business Strategist — Mapping out where an organisation should go in 5 years? That's your zone.", "📜 Policy Analyst — Complex systems and long-term consequences are exactly what your brain is wired for.", "🔎 Management Consultant — Businesses bring you in to see what they can't see themselves."],
+    careersMs: ["📊 Analis Data — Anda suka corak dan apa yang ia dedahkan. Data hanyalah teka-teki lain untuk diselesaikan.", "🏛️ Ahli Strategi Perniagaan — Merancang hala tuju organisasi dalam 5 tahun? Itu bidang anda.", "📜 Analis Dasar — Sistem kompleks dan akibat jangka panjang adalah apa yang otak anda direka untuk.", "🔎 Perunding Pengurusan — Perniagaan mendapatkan anda untuk melihat apa yang mereka sendiri tidak nampak."] },
 
-  // Combo: Visionary + X
   "V+E": { emoji: "🔥", en: "The Hustler", ms: "Si Usahawan Jalanan", color: "#C2437A", bg: "#FDEEF5",
     descEn: "Big dreams AND the drive to make them real? That's rare. You're the one pitching bold ideas on Monday and shipping them by Friday. Equal parts dreamer and doer.",
-    descMs: "Impian besar DAN semangat untuk merealisasikannya? Itu jarang ada. Anda mencadangkan idea berani pada Isnin dan menyiapkannya menjelang Jumaat. Separuh pemimpi, separuh pelaksana." },
+    descMs: "Impian besar DAN semangat untuk merealisasikannya? Itu jarang ada. Separuh pemimpi, separuh pelaksana.",
+    careersEn: ["🚀 Startup Founder — You have the vision to start something and the grit to survive the early chaos.", "💼 Sales Lead — Pitching, closing, hitting targets — the hustle cycle energises you.", "📈 Business Development Manager — Opening new doors and making things happen is your daily fuel.", "⚡ Growth Hacker — Finding scrappy, fast ways to grow something appeals to both sides of your personality."],
+    careersMs: ["🚀 Pengasas Startup — Anda ada visi untuk memulakan sesuatu dan ketabahan untuk terus bertahan.", "💼 Ketua Jualan — Mempersembahkan, menutup tawaran, mencapai sasaran — kitaran hustler ini memberi anda tenaga.", "📈 Pengurus Pembangunan Perniagaan — Membuka pintu baru dan merealisasikan sesuatu adalah bahan bakar harian anda.", "⚡ Growth Hacker — Mencari cara cepat dan kreatif untuk mengembangkan sesuatu menarik minat dua sisi personaliti anda."] },
+
   "V+H": { emoji: "✨", en: "The Inspirer", ms: "Si Penyuluh", color: "#7F77DD", bg: "#EEEDFE",
     descEn: "You don't just have great ideas — you make people believe in them. Your warmth and vision create a gravitational pull. People follow you not because they have to, but because they want to.",
-    descMs: "Anda bukan sekadar ada idea hebat — anda buat orang percaya padanya. Kehangatan dan visi anda mencipta daya tarikan. Orang mengikuti anda bukan kerana terpaksa, tetapi kerana mereka mahu." },
+    descMs: "Anda bukan sekadar ada idea hebat — anda buat orang percaya padanya. Orang mengikuti anda kerana mereka mahu.",
+    careersEn: ["🎤 Public Speaker / Emcee — You command attention naturally and leave people feeling motivated.", "🧠 Brand Strategist — You understand how to make people feel something about a brand — and act on it.", "📣 Marketing Manager — Storytelling, campaigns, and connecting with audiences is your playground.", "🌟 Life Coach / Mentor — Helping others unlock their potential through your guidance and warmth is deeply fulfilling."],
+    careersMs: ["🎤 Penceramah Awam / Emsi — Anda menarik perhatian secara semula jadi dan membuat orang rasa bermotivasi.", "🧠 Ahli Strategi Jenama — Anda faham cara membuat orang merasai sesuatu tentang jenama dan bertindak balas.", "📣 Pengurus Pemasaran — Penceritaan, kempen, dan menghubungi khalayak adalah taman permainan anda.", "🌟 Jurulatih Hidup / Mentor — Membantu orang lain membuka potensi mereka melalui bimbingan anda sangat memuaskan."] },
+
   "V+S": { emoji: "🌐", en: "The Architect", ms: "Si Perancang Agung", color: "#2C6FD1", bg: "#E8F1FD",
     descEn: "You imagine the future AND blueprint how to build it. Where others see a wild idea, you see a structured path. You're the person who makes 'impossible' feel inevitable.",
-    descMs: "Anda membayangkan masa depan DAN merancang cara membinanya. Di mana orang lain nampak idea gila, anda nampak jalan yang tersusun. Anda adalah orang yang menjadikan 'mustahil' terasa boleh berlaku." },
+    descMs: "Anda membayangkan masa depan DAN merancang cara membinanya. Anda menjadikan 'mustahil' terasa boleh berlaku.",
+    careersEn: ["🖥️ UX Designer — You see how things should work and design the path to get users there intuitively.", "🏗️ Systems Engineer — Building complex systems that actually function beautifully satisfies both your vision and logic.", "🏙️ Urban Planner — Designing cities and spaces for how people actually live and move energises you.", "📋 Chief of Staff — Translating a leader's vision into an executable organisational plan is your sweet spot."],
+    careersMs: ["🖥️ Pereka UX — Anda nampak cara sesuatu patut berfungsi dan reka laluan untuk pengguna sampai ke sana.", "🏗️ Jurutera Sistem — Membina sistem kompleks yang berfungsi dengan indah memuaskan visi dan logik anda.", "🏙️ Perancang Bandar — Mereka bentuk bandar dan ruang untuk cara manusia sebenarnya hidup memberi anda tenaga.", "📋 Ketua Staf — Menterjemahkan visi pemimpin kepada pelan organisasi yang boleh dilaksanakan adalah kelebihan anda."] },
 
-  // Combo: Executor + X
   "E+V": { emoji: "💡", en: "The Launcher", ms: "Si Pelancaran", color: "#BA7517", bg: "#FAEEDA",
     descEn: "You have the rare ability to take a spark of an idea and turn it into something real, fast. You're not waiting for perfect conditions — you build the plane while flying it.",
-    descMs: "Anda mempunyai kebolehan langka untuk mengambil percikan idea dan menjadikannya kenyataan, dengan pantas. Anda tidak menunggu keadaan yang sempurna — anda bina kapal sambil terbang." },
+    descMs: "Anda mempunyai kebolehan langka untuk mengambil percikan idea dan menjadikannya kenyataan dengan pantas.",
+    careersEn: ["🛠️ Product Developer — Taking something from 0 to 1 quickly and iterating fast is exactly how you operate.", "💡 Innovation Lead — Your job is to make sure the organisation doesn't get left behind — and you love that pressure.", "🖥️ Tech Entrepreneur — Building, launching, pivoting — the startup cycle is made for someone like you.", "🔧 Creative Technologist — Bridging creativity and execution, you turn concepts into working prototypes fast."],
+    careersMs: ["🛠️ Pembangun Produk — Mengambil sesuatu dari 0 kepada 1 dengan cepat dan mengulangi dengan pantas adalah cara anda beroperasi.", "💡 Ketua Inovasi — Kerja anda adalah memastikan organisasi tidak ketinggalan — dan anda suka tekanan itu.", "🖥️ Usahawan Teknologi — Membina, melancarkan, berputar — kitaran startup dicipta untuk seseorang seperti anda.", "🔧 Teknologis Kreatif — Menjambatani kreativiti dan pelaksanaan, anda menukar konsep kepada prototaip yang berfungsi dengan cepat."] },
+
   "E+H": { emoji: "🤝", en: "The Team Captain", ms: "Si Kapten Pasukan", color: "#1D9E75", bg: "#E1F5EE",
     descEn: "You get things done AND make sure no one gets left behind. Results matter to you, but so do people. You're the leader who celebrates the team's wins louder than your own.",
-    descMs: "Anda menyiapkan kerja DAN pastikan tiada siapa yang tertinggal. Hasil penting bagi anda, begitu juga manusia. Anda adalah pemimpin yang meraikan kejayaan pasukan lebih kuat daripada kejayaan sendiri." },
+    descMs: "Anda menyiapkan kerja DAN pastikan tiada siapa yang tertinggal. Anda meraikan kejayaan pasukan lebih kuat daripada kejayaan sendiri.",
+    careersEn: ["👑 Team Lead / Department Head — Leading a group toward a goal while keeping everyone engaged is your natural state.", "📅 Operations Manager — You balance people and process better than almost anyone — teams under you actually thrive.", "🎪 Event Coordinator — Pulling off complex events requires your exact mix of execution and people management.", "📌 Programme Manager — Overseeing multiple workstreams while keeping everyone aligned is where you genuinely excel."],
+    careersMs: ["👑 Ketua Pasukan / Ketua Jabatan — Memimpin kumpulan ke arah matlamat sambil memastikan semua orang terlibat adalah keadaan semula jadi anda.", "📅 Pengurus Operasi — Anda mengimbangi manusia dan proses dengan lebih baik daripada hampir sesiapa pun.", "🎪 Koordinator Acara — Melaksanakan acara kompleks memerlukan gabungan tepat pelaksanaan dan pengurusan orang anda.", "📌 Pengurus Program — Mengawasi pelbagai aliran kerja sambil memastikan semua orang selaras adalah kelebihan anda."] },
+
   "E+S": { emoji: "📊", en: "The Operator", ms: "Si Pengurus Handal", color: "#D85A30", bg: "#FAECE7",
     descEn: "Systems, processes, efficiency — you speak this language fluently. You turn messy workflows into clean machines. If something can be optimised, you've already figured out how.",
-    descMs: "Sistem, proses, kecekapan — anda fasih dengan bahasa ini. Anda tukar aliran kerja yang tunggang-langgang menjadi mesin yang kemas. Jika sesuatu boleh dioptimumkan, anda sudah tahu caranya." },
+    descMs: "Sistem, proses, kecekapan — anda fasih dengan bahasa ini. Jika sesuatu boleh dioptimumkan, anda sudah tahu caranya.",
+    careersEn: ["📉 Business Analyst — Diagnosing what's broken in a business and fixing it systematically is deeply satisfying to you.", "💰 Finance Manager — Numbers, forecasts, controls — your structured mind thrives in financial environments.", "🔄 Process Improvement Specialist — Making things run better, faster, and cheaper is genuinely exciting to you.", "🏭 Supply Chain Manager — Orchestrating complex supply networks requires exactly your kind of disciplined thinking."],
+    careersMs: ["📉 Analis Perniagaan — Mendiagnosis apa yang rosak dalam perniagaan dan memperbaikinya secara sistematik sangat memuaskan bagi anda.", "💰 Pengurus Kewangan — Nombor, ramalan, kawalan — minda berstruktur anda berkembang dalam persekitaran kewangan.", "🔄 Pakar Penambahbaikan Proses — Membuat sesuatu berjalan lebih baik, lebih cepat, dan lebih murah sangat menarik bagi anda.", "🏭 Pengurus Rantaian Bekalan — Mengorkestrakan rangkaian bekalan yang kompleks memerlukan pemikiran berdisiplin seperti anda."] },
 
-  // Combo: Harmonizer + X
   "H+V": { emoji: "🎨", en: "The Culture Maker", ms: "Si Pembina Budaya", color: "#C2437A", bg: "#FDEEF5",
     descEn: "You believe great teams are built on great culture — and you actively create it. Creative, people-first, and full of energy, you make work feel like a place people actually want to be.",
-    descMs: "Anda percaya pasukan hebat dibina atas budaya yang hebat — dan anda aktif menciptanya. Kreatif, mengutamakan manusia, dan penuh tenaga, anda menjadikan tempat kerja sebagai tempat yang orang benar-benar mahu berada." },
+    descMs: "Anda percaya pasukan hebat dibina atas budaya yang hebat — dan anda aktif menciptanya.",
+    careersEn: ["🏷️ Employer Branding Specialist — You shape how the world sees a company as a place to work — and you do it creatively.", "🎬 Creative Producer — Bringing creative projects to life while keeping the team energised is your sweet spot.", "💛 People & Culture Manager — You don't just manage HR processes — you build environments people love.", "✍️ Content Strategist — Crafting narratives that resonate with people and reflect a brand's values is deeply natural to you."],
+    careersMs: ["🏷️ Pakar Jenama Majikan — Anda membentuk cara dunia melihat syarikat sebagai tempat bekerja — dan anda melakukannya secara kreatif.", "🎬 Penerbit Kreatif — Menghidupkan projek kreatif sambil memastikan pasukan bersemangat adalah kelebihan anda.", "💛 Pengurus Orang & Budaya — Anda tidak hanya mengurus proses HR — anda membina persekitaran yang orang sukai.", "✍️ Ahli Strategi Kandungan — Menghasilkan naratif yang bergema dengan orang dan mencerminkan nilai jenama adalah sangat semula jadi bagi anda."] },
+
   "H+S": { emoji: "🧭", en: "The Wise Owl", ms: "Si Burung Hantu Bijak", color: "#2C6FD1", bg: "#E8F1FD",
     descEn: "You combine emotional intelligence with sharp thinking — a rare combo. You read the room, understand the politics, and always know the right thing to say at the right time.",
-    descMs: "Anda menggabungkan kecerdasan emosi dengan pemikiran tajam — kombinasi yang langka. Anda memahami suasana, mengerti politik pejabat, dan sentiasa tahu apa yang perlu dikatakan pada masa yang tepat." },
-
-  // Combo: Strategist + X  
-  "S+H": { emoji: "🏛️", en: "The Diplomat", ms: "Si Diplomat", color: "#7F77DD", bg: "#EEEDFE",
-    descEn: "Strategy with a human touch. You think several steps ahead but never lose sight of the people involved. You navigate complex situations with both logic and empathy — and that's incredibly powerful.",
-    descMs: "Strategi dengan sentuhan manusiawi. Anda berfikir beberapa langkah ke hadapan tetapi tidak pernah lupa tentang manusia yang terlibat. Anda tangani situasi kompleks dengan logik dan empati — dan itu sangat berkuasa." }
+    descMs: "Anda menggabungkan kecerdasan emosi dengan pemikiran tajam — kombinasi yang langka.",
+    careersEn: ["⚖️ Corporate Lawyer / Mediator — Navigating complex human and legal dynamics with calm precision is your gift.", "🎓 Senior Advisor / Consultant — Organisations seek your counsel because you understand both the people and the strategy.", "🧠 Organisational Psychologist — Understanding how people behave within systems — and improving it — is fascinating to you.", "🕊️ Diplomat / Public Relations Lead — Knowing what to say, to whom, and when is the foundation of both these roles — and you were born for it."],
+    careersMs: ["⚖️ Peguam Korporat / Pengantara — Menavigasi dinamik manusia dan undang-undang yang kompleks dengan ketepatan tenang adalah pemberian anda.", "🎓 Penasihat Kanan / Perunding — Organisasi mendapatkan nasihat anda kerana anda memahami manusia dan strategi.", "🧠 Ahli Psikologi Organisasi — Memahami cara manusia berkelakuan dalam sistem — dan memperbaikinya — sangat menarik bagi anda.", "🕊️ Diplomat / Ketua Perhubungan Awam — Mengetahui apa yang perlu dikatakan, kepada siapa, dan bila adalah asas kedua-dua peranan ini."] }
 };
 
 // ─── QUESTIONS (alternating: fun, survey, fun, survey...) ────────────────────
@@ -419,6 +444,23 @@ function showResult() {
   document.getElementById('r-title-ms').textContent = r.ms;
   document.getElementById('r-desc').textContent = r.descEn;
   document.getElementById('r-desc-ms').textContent = r.descMs;
+
+  // Careers
+  const careersDiv = document.getElementById('r-careers');
+  careersDiv.innerHTML = '';
+  if (r.careersEn) {
+    const titleEn = document.createElement('p');
+    titleEn.style.cssText = 'font-size:13px; font-weight:600; margin-bottom:10px; color:#1a1a1a;';
+    titleEn.textContent = '💼 Careers that suit you / Kerjaya yang sesuai untuk anda:';
+    careersDiv.appendChild(titleEn);
+    r.careersEn.forEach((c, i) => {
+      const item = document.createElement('div');
+      item.style.cssText = 'background:#f7f7f5; border-radius:8px; padding:10px 14px; margin-bottom:8px; text-align:left;';
+      item.innerHTML = `<div style="font-size:13px; color:#1a1a1a; line-height:1.5;">${c}</div>
+                        <div style="font-size:12px; color:#6b6b6b; font-style:italic; margin-top:3px;">${r.careersMs[i]}</div>`;
+      careersDiv.appendChild(item);
+    });
+  }
 
   submitToSheets(r.en);
 }
