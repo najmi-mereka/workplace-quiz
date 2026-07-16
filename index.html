@@ -217,8 +217,9 @@ const results = {
     careersMs: ["⚖️ Peguam Korporat / Pengantara — Menavigasi dinamik manusia dan undang-undang yang kompleks dengan ketepatan tenang adalah pemberian anda.", "🎓 Penasihat Kanan / Perunding — Organisasi mendapatkan nasihat anda kerana anda memahami manusia dan strategi.", "🧠 Ahli Psikologi Organisasi — Memahami cara manusia berkelakuan dalam sistem — dan memperbaikinya — sangat menarik bagi anda.", "🕊️ Diplomat / Ketua Perhubungan Awam — Mengetahui apa yang perlu dikatakan, kepada siapa, dan bila adalah asas kedua-dua peranan ini."] }
 };
 
- const questions = [
-  // Q0 — Cohort (shown before quiz, treated as first survey question)
+// ─── QUESTIONS (alternating: fun, survey, fun, survey...) ────────────────────
+const questions = [
+ // Q0 — Cohort (shown before quiz, treated as first survey question)
   { kind:"survey", key:"cohort", en:"Which cohort are you from?", ms:"Anda dari kohort mana?", type:"dropdown",
     options:[
       { en:"Selangor", ms:"Selangor" },
@@ -227,9 +228,6 @@ const results = {
       { en:"Sarawak", ms:"Sarawak" },
       { en:"Johor", ms:"Johor" }
     ]},
-
-// ─── QUESTIONS (alternating: fun, survey, fun, survey...) ────────────────────
-const questions = [
   // Q1 — Fun
   { kind:"fun", en:"A surprise all-hands meeting is called with no agenda. Your first thought is…", ms:"Mesyuarat mengejut diadakan tanpa agenda. Fikiran pertama anda ialah…",
     options:[
